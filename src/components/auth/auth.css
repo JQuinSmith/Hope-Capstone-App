@@ -1,0 +1,36 @@
+.welcomelogo {
+    height: 390px;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    }
+
+    .registrationDiv {
+        display: flex;
+        margin-top: 1em;
+        justify-content: space-around;
+        flex-direction: row;
+        height: 80%;
+        width: 100%;
+        margin: 2em;
+    }
+     .registrationButton, .loginButton  {
+        justify-content: space-evenly;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px !important;
+        align-items: center;
+        height: 70px;
+        width: 190px;
+        margin: 1em;
+        margin-top: 50px;
+        margin-left: 60px;
+        background-color: white;
+
+    }
+
+    .close, .add  {
+        display: flex;
+        justify-content: space-evenly;
+        font-family: 'Raleway', sans-serif;
+        font-size: 20px !important;
+    }
