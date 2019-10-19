@@ -1,0 +1,44 @@
+
+.header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.issues-container {
+    margin-left: 25px;
+}
+
+.issue-card {
+    margin: 20px 0px 0px 0px;
+}
+
+.issue-card-content {
+    padding: 10px 0px 0px 15px;
+    max-width: 35%;
+    border: .75px solid rgba(40, 40, 40, 0.25);
+    border-radius: 2%;
+
+}
+
+.delete-issue {
+    margin: 5px;
+}
+
+.edit-issue {
+    margin: 5px;
+}
+
+.issueAccept {
+    display:flex;
+    justify-content: right;
+    margin-left: 267px;
+    max-width: 45%;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: right;
+    margin-left: 260px;
+    margin-bottom: 5px;
+
+}

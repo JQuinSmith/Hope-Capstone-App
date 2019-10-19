@@ -2,10 +2,11 @@ import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import './NavBar.css'
+import { Navbar } from 'reactstrap'
 
 
 
-class NavBar extends Component {
+class NavigationBar extends Component {
 
     isAuthenticated = () => sessionStorage.getItem("activeUser") !== null
 
@@ -18,18 +19,24 @@ class NavBar extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 ">
+            <Navbar className="navbar navbar-light light-blue flex-md-nowrap p-0">
                 <ul className="nav nav-pills nav-fill">
                     {(this.props.user) ?
-                    <>
-                    <li><span className="nav-link" onClick={this.logOut}>Logout</span></li>
-                    </>
-                    : null
-                }
+                        <>
+                            <li><span className="nav-link" onClick={null}>My Issues</span></li>
+
+                            <li><span className="nav-link" onClick={null}>My Open Issues</span></li>
+
+                            <li><span className="nav-link" onClick={null}>My Resolved Issues</span></li>
+
+                            <li><span className="nav-link" onClick={this.logOut}>Logout</span></li>
+                        </>
+                        : null
+                    }
                 </ul>
-            </nav>
+            </Navbar>
         )
     }
 }
 
-export default withRouter(NavBar);
+export default withRouter(NavigationBar);

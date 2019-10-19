@@ -2,7 +2,16 @@ small {
     font-size: 75%;
   }
 
+ul {
+  margin-left: 600px;
+}
+
 .nav-link  {
-    font-size: 30px;
-    text-align: right;
+    font-size: 20px;
+
+  }
+
+  nav {
+    box-shadow: 0 8px 20px 0 rgba(0.4,0.4,0.4,0.2);
+
   }
