@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
-import { Modal, ModalHeader, ModalBody, } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 
 
 
@@ -47,12 +47,12 @@ class IssueCard extends Component {
 
 						{(this.props.activeUserId !== this.props.issueUserId) ?
 							<>
-								<div className="issueAccept"><button
+								<div className="issueAccept"><Button color="primary"
 									type="button" className="accept-issue"
 									onClick={() => {
 										window.confirm("Lend this person a hand?")
 									}}
-								>Lend a Hand?</button>
+								>Lend a Hand?</Button>
 								</div>
 							</>
 							: null
@@ -62,23 +62,27 @@ class IssueCard extends Component {
 						{(this.props.activeUserId === this.props.issueUserId) ?
 						<>
 							<div className="card-buttons">
-								<button
-									type="button" className="delete-issue"
+								<Button
+									color="danger"
+									type="button" 
+									className="delete-issue"
 									onClick={() =>
 										this.handleDelete(this.props.issue.id)
 									}
 								>
 									Delete
-						</button>
+								</Button>
 
-								<button
-									type="button" className="edit-issue"
+								<Button
+									color="secondary"
+									type="button" 
+									className="edit-issue"
 									onClick={() => {
 										this.toggle()
 									}}
 								>
 									Edit
-						</button>
+						</Button>
 							</div>
 							</>
 							: null

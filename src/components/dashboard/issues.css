@@ -2,6 +2,7 @@
 .header {
     text-align: center;
     margin-top: 20px;
+    color: #444444
 }
 
 .issues-container {
@@ -10,14 +11,15 @@
 
 .issue-card {
     margin: 20px 0px 0px 0px;
+    transition: .3s;
+    border: .75px solid rgba(79, 79, 79, 0.25);
+    max-width: 45%;
+    color: #444444
 }
+
 
 .issue-card-content {
     padding: 10px 0px 0px 15px;
-    max-width: 35%;
-    border: .75px solid rgba(40, 40, 40, 0.25);
-    border-radius: 2%;
-
 }
 
 .delete-issue {
@@ -28,17 +30,20 @@
     margin: 5px;
 }
 
+.accept-issue {
+    margin-bottom: 10px;
+}
+
 .issueAccept {
     display:flex;
     justify-content: right;
-    margin-left: 350px;
+    margin-left: 485px;
     max-width: 45%;
 }
 
 .card-buttons {
     display: flex;
     justify-content: right;
-    margin-left: 343px;
+    margin-left: 470px;
     margin-bottom: 5px;
-
 }

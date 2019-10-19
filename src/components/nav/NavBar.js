@@ -20,9 +20,12 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="navbar navbar-light light-blue flex-md-nowrap p-0">
+                <h4>Hope</h4>
                 <ul className="nav nav-pills nav-fill">
+                    
                     {(this.props.user) ?
                         <>
+
                             <li><Link className="nav-link" to="/">Home</Link></li>
 
                             <li><Link className="nav-link" to="/myissues">My Issues</Link></li>
