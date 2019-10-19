@@ -31,14 +31,14 @@
 .issueAccept {
     display:flex;
     justify-content: right;
-    margin-left: 267px;
+    margin-left: 350px;
     max-width: 45%;
 }
 
 .card-buttons {
     display: flex;
     justify-content: right;
-    margin-left: 260px;
+    margin-left: 343px;
     margin-bottom: 5px;
 
 }

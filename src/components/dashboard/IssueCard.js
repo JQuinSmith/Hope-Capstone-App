@@ -45,36 +45,44 @@ class IssueCard extends Component {
 
 						<p>Deadline: {this.props.issue.issueDeadline}</p>
 
+						{(this.props.activeUserId !== this.props.issueUserId) ?
+							<>
+								<div className="issueAccept"><button
+									type="button" className="accept-issue"
+									onClick={() => {
+										window.confirm("Lend this person a hand?")
+									}}
+								>Lend a Hand?</button>
+								</div>
+							</>
+							: null
+						}
 
-						<div className="issueAccept"><button
-							type="button" className="accept-issue"
-							onClick={() => {
-								window.confirm("Lend this person a hand?")
-							}}
-						>Lend a Hand?</button>
-						</div>
 
-
-
-					<div className="card-buttons">
-						<button
-							type="button" className="delete-issue"
-							onClick={() =>
-								this.handleDelete(this.props.issue.id)
-							}
-						>
-							Delete
+						{(this.props.activeUserId === this.props.issueUserId) ?
+						<>
+							<div className="card-buttons">
+								<button
+									type="button" className="delete-issue"
+									onClick={() =>
+										this.handleDelete(this.props.issue.id)
+									}
+								>
+									Delete
 						</button>
 
-						<button
-							type="button" className="edit-issue"
-							onClick={() => {
-								this.toggle()
-							}}
-						>
-							Edit
+								<button
+									type="button" className="edit-issue"
+									onClick={() => {
+										this.toggle()
+									}}
+								>
+									Edit
 						</button>
-					</div>
+							</div>
+							</>
+							: null
+						}
 					</div>
 
 

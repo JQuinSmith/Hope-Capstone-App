@@ -9,7 +9,8 @@ render() {
         <div>
 
             <h1 className="header">This is the Dashboard</h1>
-            <IssueList />
+            <IssueList 
+            user={this.props.user}/>
 
         </div>
     );

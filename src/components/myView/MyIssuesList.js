@@ -2,10 +2,8 @@
 import React, { Component } from "react";
 import IssueCard from "../dashboard/IssueCard";
 import APIManager from "../../modules/APIManager";
-import AddIssueForm from "./AddIssueForm";
-import "./issues.css";
 
-class IssueList extends Component {
+class MyIssuesList extends Component {
     //define what this component needs to render
     state = {
         issues: [],
@@ -51,11 +49,8 @@ class IssueList extends Component {
             <>
                 <div className="issues-container">
                     <div className="issues-intro">
-                        <h2>Issues List</h2>
+                        <h2>My Issues List</h2>
                     </div>
-                    <AddIssueForm
-                        {...this.props}
-                        getData={this.getData} />
                     <div className="issue-container-cards">
                         {this.state.issues.map(issue => (
                             <IssueCard
@@ -76,4 +71,4 @@ class IssueList extends Component {
     }
 }
 
-export default IssueList;
+export default MyIssuesList;

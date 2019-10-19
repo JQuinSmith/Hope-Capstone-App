@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import './NavBar.css'
 import { Navbar } from 'reactstrap'
@@ -23,13 +23,15 @@ class NavigationBar extends Component {
                 <ul className="nav nav-pills nav-fill">
                     {(this.props.user) ?
                         <>
-                            <li><span className="nav-link" onClick={null}>My Issues</span></li>
+                            <li><Link className="nav-link" to="/">Home</Link></li>
 
-                            <li><span className="nav-link" onClick={null}>My Open Issues</span></li>
+                            <li><Link className="nav-link" to="/myissues">My Issues</Link></li>
 
-                            <li><span className="nav-link" onClick={null}>My Resolved Issues</span></li>
+                            <li><Link className="nav-link" to="/acceptedissues">My Accepted Issues</Link></li>
 
-                            <li><span className="nav-link" onClick={this.logOut}>Logout</span></li>
+                            <li><Link className="nav-link" to="/resolvedissues">My Resolved Issues</Link></li>
+
+                            <li><Link className="nav-link" to ="/login" onClick={this.logOut}>Logout</Link></li>
                         </>
                         : null
                     }
