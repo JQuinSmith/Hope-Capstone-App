@@ -4,9 +4,10 @@ ul {
   margin-left: 675px;
 }
 
-.nav-link  {
+li {
     font-size: 20px;
     color: #444444;
+    padding: 8px 16px;
 
   }
 
