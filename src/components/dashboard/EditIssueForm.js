@@ -47,6 +47,7 @@ class EditIssueForm extends Component {
 					this.setState({
 						issueName: issue.issueName,
 						issueDescription: issue.issueDescription,
+						issueDeadline: issue.issueDeadline,
 						loadingStatus: false,
 					});
 				});
@@ -73,7 +74,7 @@ class EditIssueForm extends Component {
 									value={this.state.issueName}
 								/>
 								<label htmlFor="issueName">
-									issue Title
+									Issue Title
 									</label>
 
 								<input
@@ -107,7 +108,7 @@ class EditIssueForm extends Component {
 						type="button"
 						disabled={this.state.loadingStatus}
 						onClick={(evt) => {
-							this.updateExistingissue(evt)
+							this.updateExistingIssue(evt)
 							this.props.toggle()
 						}}
 						className="btn btn-primary"

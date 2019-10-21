@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import './NavBar.css'
 import { Navbar } from 'reactstrap'
@@ -20,16 +20,21 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="navbar navbar-light light-blue flex-md-nowrap p-0">
+                <h4>Hope</h4>
                 <ul className="nav nav-pills nav-fill">
+                    
                     {(this.props.user) ?
                         <>
-                            <li><span className="nav-link" onClick={null}>My Issues</span></li>
 
-                            <li><span className="nav-link" onClick={null}>My Open Issues</span></li>
+                            <li><Link className="nav-link-home" to="/">Home</Link></li>
 
-                            <li><span className="nav-link" onClick={null}>My Resolved Issues</span></li>
+                            <li><Link className="nav-link-my-issues" to="/myissues">My Issues</Link></li>
 
-                            <li><span className="nav-link" onClick={this.logOut}>Logout</span></li>
+                            <li><Link className="nav-link-accepted-issues" to="/acceptedissues">My Accepted Issues</Link></li>
+
+                            <li><Link className="nav-link-resolved-issues" to="/resolvedissues">My Resolved Issues</Link></li>
+
+                            <li><Link className="nav-link-logout" to ="/login" onClick={this.logOut}>Logout</Link></li>
                         </>
                         : null
                     }

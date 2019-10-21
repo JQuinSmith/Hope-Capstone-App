@@ -1,9 +1,9 @@
 // Purpose of the file to display all issues
 import React, { Component } from "react";
-// import IssueCard from "../dashboard/IssueCard";
+import IssueCard from "../dashboard/IssueCard";
 import APIManager from "../../modules/APIManager";
 
-class ResolvedIssuesList extends Component {
+class MyIssuesList extends Component {
     //define what this component needs to render
     state = {
         issues: [],
@@ -49,10 +49,10 @@ class ResolvedIssuesList extends Component {
             <>
                 <div className="issues-container">
                     <div className="issues-intro">
-                        <h2>Resolved Issues List</h2>
+                        <h2>My Issues List</h2>
                     </div>
                     <div className="issue-container-cards">
-                        {/* {this.state.issues.map(issue => (
+                        {this.state.issues.map(issue => (
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
@@ -63,7 +63,7 @@ class ResolvedIssuesList extends Component {
                                 {...this.props}
                                 getData={this.getData}
                             />
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </>
@@ -71,4 +71,4 @@ class ResolvedIssuesList extends Component {
     }
 }
 
-export default ResolvedIssuesList;
+export default MyIssuesList;

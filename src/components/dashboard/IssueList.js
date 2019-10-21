@@ -62,6 +62,9 @@ class IssueList extends Component {
                                 key={issue.id}
                                 issue={issue}
                                 deleteIssue={this.deleteIssue}
+                                user={this.props.user}
+                                activeUserId={this.activeUserId}
+                                issueUserId={issue.userId}
                                 {...this.props}
                                 getData={this.getData}
                             />

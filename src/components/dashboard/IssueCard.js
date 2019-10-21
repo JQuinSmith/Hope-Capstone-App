@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
-import { Modal, ModalHeader, ModalBody, } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 
 
 
@@ -45,36 +45,48 @@ class IssueCard extends Component {
 
 						<p>Deadline: {this.props.issue.issueDeadline}</p>
 
+						{(this.props.activeUserId !== this.props.issueUserId) ?
+							<>
+								<div className="issueAccept"><Button color="primary"
+									type="button" className="accept-issue"
+									onClick={() => {
+										window.confirm("Lend this person a hand?")
+									}}
+								>Lend a Hand?</Button>
+								</div>
+							</>
+							: null
+						}
 
-						<div className="issueAccept"><button
-							type="button" className="accept-issue"
-							onClick={() => {
-								window.confirm("Lend this person a hand?")
-							}}
-						>Lend a Hand?</button>
-						</div>
 
+						{(this.props.activeUserId === this.props.issueUserId) ?
+						<>
+							<div className="card-buttons">
+								<Button
+									color="danger"
+									type="button" 
+									className="delete-issue"
+									onClick={() =>
+										this.handleDelete(this.props.issue.id)
+									}
+								>
+									Delete
+								</Button>
 
-
-					<div className="card-buttons">
-						<button
-							type="button" className="delete-issue"
-							onClick={() =>
-								this.handleDelete(this.props.issue.id)
-							}
-						>
-							Delete
-						</button>
-
-						<button
-							type="button" className="edit-issue"
-							onClick={() => {
-								this.toggle()
-							}}
-						>
-							Edit
-						</button>
-					</div>
+								<Button
+									color="secondary"
+									type="button" 
+									className="edit-issue"
+									onClick={() => {
+										this.toggle()
+									}}
+								>
+									Edit
+						</Button>
+							</div>
+							</>
+							: null
+						}
 					</div>
 
 

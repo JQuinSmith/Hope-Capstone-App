@@ -4,11 +4,11 @@ export default {
     get(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
-    getAll(resource) {
-      return fetch(`${remoteURL}/${resource}`).then(result => result.json())
+    getAllMy(resource, id) {
+      return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
 
-    getAllMessages(resource){
+    getAll(resource){
       return fetch (`${remoteURL}/${resource}`).then(result => result.json())
     },
 
