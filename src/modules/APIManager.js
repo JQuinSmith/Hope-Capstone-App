@@ -4,8 +4,8 @@ export default {
     get(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
-    getAllMy(resource, id) {
-      return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
+    getAllMy(resource, userId) {
+      return fetch(`${remoteURL}/${resource}?userId=${userId}`).then(result => result.json())
     },
 
     getAll(resource){

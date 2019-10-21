@@ -31,7 +31,7 @@ class IssueList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues", this.activeUserId).then(issues => {
+    getData = () => APIManager.getAll("issues").then(issues => {
         this.setState({
             issues: issues
         });

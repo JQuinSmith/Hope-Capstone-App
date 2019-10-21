@@ -50,7 +50,9 @@ class IssueCard extends Component {
 								<div className="issueAccept"><Button color="primary"
 									type="button" className="accept-issue"
 									onClick={() => {
-										window.confirm("Lend this person a hand?")
+										if(window.confirm("Lend this person a hand?")) {
+
+										}
 									}}
 								>Lend a Hand?</Button>
 								</div>
@@ -64,7 +66,7 @@ class IssueCard extends Component {
 							<div className="card-buttons">
 								<Button
 									color="danger"
-									type="button" 
+									type="button"
 									className="delete-issue"
 									onClick={() =>
 										this.handleDelete(this.props.issue.id)
@@ -75,7 +77,7 @@ class IssueCard extends Component {
 
 								<Button
 									color="secondary"
-									type="button" 
+									type="button"
 									className="edit-issue"
 									onClick={() => {
 										this.toggle()
