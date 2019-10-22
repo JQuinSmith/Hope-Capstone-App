@@ -9,6 +9,8 @@ import { Navbar } from 'reactstrap'
 class NavigationBar extends Component {
 
     isAuthenticated = () => sessionStorage.getItem("activeUser") !== null
+    activeUserName = (sessionStorage.getItem("name"))
+
 
     logOut = (event) => {
         this.props.clearUser()
@@ -20,11 +22,11 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="navbar navbar-light light-blue flex-md-nowrap p-0">
-                <h4>Hope</h4>
-                <ul className="nav nav-pills nav-fill">
-                    
-                    {(this.props.user) ?
-                        <>
+
+                {(this.props.user) ?
+                    <>
+                        <h4>Welcome, {this.activeUserName}!</h4>
+                        <ul className="nav nav-pills nav-fill">
 
                             <li><Link className="nav-link" to="/">Home</Link></li>
 
@@ -34,11 +36,11 @@ class NavigationBar extends Component {
 
                             <li><Link className="nav-link" to="/resolvedissues">My Resolved Issues</Link></li>
 
-                            <li><Link className="nav-link" to ="/login" onClick={this.logOut}>Logout</Link></li>
+                            <li><Link className="nav-link" to="/login" onClick={this.logOut}>Logout</Link></li>
+                </ul>
                         </>
                         : null
                     }
-                </ul>
             </Navbar>
         )
     }

@@ -54,18 +54,42 @@ class IssueCard extends Component {
 
 						<p>Deadline: {this.props.issue.issueDeadline}</p>
 
-						{(this.props.activeUserId !== this.props.issueUserId) ?
+						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
-								<div className="issueAccept"><Button color="primary"
+								<div className="card-buttons">
+									<Button color="primary"
 									type="button" className="accept-issue"
 									onClick={() => {
 										if (window.confirm("Lend this person a hand?")) {
 											console.log(this.props.issueId)
-											this.lendAHand(this.props.issueId, this.props.issueId,this.activeUserId);
+											this.lendAHand(this.props.issueId, this.props.issueId, this.activeUserId);
 										}
 										else { }
 									}}
 								>Lend a Hand?</Button>
+								</div>
+							</>
+							: null
+						}
+
+						{this.props.activeUserId === this.props.helpingUserId ?
+							<>
+								<div className="card-buttons">
+
+									<Button color="danger"
+										type="button" className="cancel-issue"
+										onClick={() => {
+											window.confirm("Change your mind?")
+										}}
+									>Drop Issue
+									</Button>
+									<Button color="primary"
+										type="button" className="complete-issue"
+										onClick={() => {
+											window.confirm("Did you lend a hand?")
+										}}
+									>Task Complete!
+									</Button>
 								</div>
 							</>
 							: null

@@ -39,7 +39,7 @@ class IssueList extends Component {
 
     componentDidMount() {
         //getAll from APIManager and hang on to that data; put it in state
-        APIManager.getAll("issues", this.activeUserId).then(issues => {
+        APIManager.getAll("issues").then(issues => {
             this.setState({
                 issues: issues
             });
