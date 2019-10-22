@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 // import IssueCard from "../dashboard/IssueCard";
 import APIManager from "../../modules/APIManager";
+import IssueCard from "../dashboard/IssueCard"
 
 class AcceptedIssuesList extends Component {
     //define what this component needs to render
@@ -37,7 +38,7 @@ class AcceptedIssuesList extends Component {
 
     componentDidMount() {
         //getAll from APIManager and hang on to that data; put it in state
-        APIManager.getAll("issues", this.activeUserId).then(issues => {
+        APIManager.getAllMyAccepted("issues", this.activeUserId).then(issues => {
             this.setState({
                 issues: issues
             });
@@ -52,7 +53,7 @@ class AcceptedIssuesList extends Component {
                         <h2>Accepted Issues List</h2>
                     </div>
                     <div className="issue-container-cards">
-                        {/* {this.state.issues.map(issue => (
+                        {this.state.issues.map(issue => (
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
@@ -63,7 +64,7 @@ class AcceptedIssuesList extends Component {
                                 {...this.props}
                                 getData={this.getData}
                             />
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </>

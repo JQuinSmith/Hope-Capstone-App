@@ -9,7 +9,9 @@ import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 class IssueCard extends Component {
 
 	state = {
-		modal: false
+		helpingUserId: null,
+		issueId: "",
+		modal: false,
 	};
 
 	toggle = () => {
@@ -24,6 +26,13 @@ class IssueCard extends Component {
 		APIManager.delete("issues", id)
 			.then(() => { this.props.getData() }
 			);
+	}
+
+	lendAHand = (issueId, id, helpingUser) => {
+		APIManager.get("issues", issueId)
+			.then((APIManager.insert("issues", id, helpingUser)
+				.then(() => { this.props.getData() }
+				)));
 	}
 
 	render() {
@@ -50,9 +59,11 @@ class IssueCard extends Component {
 								<div className="issueAccept"><Button color="primary"
 									type="button" className="accept-issue"
 									onClick={() => {
-										if(window.confirm("Lend this person a hand?")) {
-
+										if (window.confirm("Lend this person a hand?")) {
+											console.log(this.props.issueId)
+											this.lendAHand(this.props.issueId, this.props.issueId,this.activeUserId);
 										}
+										else { }
 									}}
 								>Lend a Hand?</Button>
 								</div>
@@ -62,30 +73,30 @@ class IssueCard extends Component {
 
 
 						{(this.props.activeUserId === this.props.issueUserId) ?
-						<>
-							<div className="card-buttons">
-								<Button
-									color="danger"
-									type="button"
-									className="delete-issue"
-									onClick={() =>
-										this.handleDelete(this.props.issue.id)
-									}
-								>
-									Delete
+							<>
+								<div className="card-buttons">
+									<Button
+										color="danger"
+										type="button"
+										className="delete-issue"
+										onClick={() =>
+											this.handleDelete(this.props.issue.id)
+										}
+									>
+										Delete
 								</Button>
 
-								<Button
-									color="secondary"
-									type="button"
-									className="edit-issue"
-									onClick={() => {
-										this.toggle()
-									}}
-								>
-									Edit
+									<Button
+										color="secondary"
+										type="button"
+										className="edit-issue"
+										onClick={() => {
+											this.toggle()
+										}}
+									>
+										Edit
 						</Button>
-							</div>
+								</div>
 							</>
 							: null
 						}

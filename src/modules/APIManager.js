@@ -8,12 +8,16 @@ export default {
       return fetch(`${remoteURL}/${resource}?userId=${userId}`).then(result => result.json())
     },
 
+    getAllMyAccepted(resource, helpingUserId) {
+      return fetch(`${remoteURL}/${resource}?helpingUserId=${helpingUserId}`).then(result => result.json())
+    },
+
     getAll(resource){
       return fetch (`${remoteURL}/${resource}`).then(result => result.json())
     },
 
     delete(resource ,id) {
-      return fetch(`http://localhost:5002/${resource}/${id}`, {
+      return fetch(`${remoteURL}/${resource}/${id}`, {
         method: "DELETE"
     })
       .then(result => result.json())
@@ -28,12 +32,21 @@ export default {
     }).then(data => data.json())
   },
   update(resource, editedResource) {
-    return fetch(`${remoteURL}/${resource}/${editedResource.id}`, {
+    return fetch(`${remoteURL}/${resource}/${editedResource}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(editedResource)
     }).then(data => data.json());
+  },
+  insert(resource, userId, helpingUser) {
+    return fetch(`${remoteURL}/${resource}/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({helpingUserId: helpingUser})
+    }).then(data => data.json());
   }
-  }
+}

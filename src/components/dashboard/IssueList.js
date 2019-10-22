@@ -61,10 +61,12 @@ class IssueList extends Component {
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
+                                issueId={issue.id}
                                 deleteIssue={this.deleteIssue}
                                 user={this.props.user}
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}
+                                helpingUserId={issue.helpingUserId}
                                 {...this.props}
                                 getData={this.getData}
                             />
