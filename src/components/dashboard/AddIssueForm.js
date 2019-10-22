@@ -15,7 +15,12 @@ class AddIssueForm extends Component {
         issueComplete: false,
         issueDescription: "",
         issueDeadline: "",
-        imageURL: "",
+        userId: "",
+        helpingUserId: null,
+        imageURL: null,
+        latitudeValue: null,
+        longitudeValue: null,
+        locationName: null,
         id: [],
         loadingStatus: true,
         modal: false
@@ -49,8 +54,12 @@ class AddIssueForm extends Component {
                 issueName: this.state.issueName,
                 issueDescription: this.state.issueDescription,
                 issueDeadline: this.state.issueDeadline,
-                issueComplete: false,
-                imageURL: this.state.imageURL
+                issueComplete: this.state.issueComplete,
+                imageURL: this.state.imageURL,
+                helpingUserId: this.state.helpingUserId,
+                latitudeValue: this.state.latitudeValue,
+                longitudeValue: this.state.longitudeValue,
+                locationName: this.state.locationName
             };
 
             APIManager.post("issues", addedIssue)
@@ -65,7 +74,7 @@ class AddIssueForm extends Component {
 				</button>
         );
         return (
-			<>
+            <>
                 {" "}
                 <Button className="addIssue" onClick={this.toggle}>
                     I need a hand!</Button>
@@ -116,28 +125,28 @@ class AddIssueForm extends Component {
                                     <label htmlFor="issue">Have an Image?</label>
                                     <input type="file"
                                         id="issueImage" name="issueImage"
-                                        accept="image/png, image/jpeg"/>
-								</div>
-                                    <div className="alignRight">
-                                    </div>
-							</fieldset>
-						</form>
-					</ModalBody>
-                        <ModalFooter>
-                            <Button
-                                className="add"
-                                onClick={this.addIssue}
-                            >
-                                Add
+                                        accept="image/png, image/jpeg" />
+                                </div>
+                                <div className="alignRight">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button
+                            className="add"
+                            onClick={this.addIssue}
+                        >
+                            Add
 						</Button>{" "}
-                            <Button className="cancel" onClick={this.toggle}>
-                                Cancel
+                        <Button className="cancel" onClick={this.toggle}>
+                            Cancel
 						</Button>
-                        </ModalFooter>
-				</Modal>
-			</>
-                );
-            }
-        }
+                    </ModalFooter>
+                </Modal>
+            </>
+        );
+    }
+}
 
-        export default AddIssueForm;
+export default AddIssueForm;

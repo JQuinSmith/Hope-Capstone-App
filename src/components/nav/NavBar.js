@@ -9,6 +9,8 @@ import { Navbar } from 'reactstrap'
 class NavigationBar extends Component {
 
     isAuthenticated = () => sessionStorage.getItem("activeUser") !== null
+    activeUserName = (sessionStorage.getItem("name"))
+
 
     logOut = (event) => {
         this.props.clearUser()
@@ -20,25 +22,25 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="navbar navbar-light light-blue flex-md-nowrap p-0">
-                <h4>Hope</h4>
-                <ul className="nav nav-pills nav-fill">
-                    
-                    {(this.props.user) ?
-                        <>
 
-                            <li><Link className="nav-link-home" to="/">Home</Link></li>
+                {(this.props.user) ?
+                    <>
+                        <h4>Welcome, {this.activeUserName}!</h4>
+                        <ul className="nav nav-pills nav-fill">
 
-                            <li><Link className="nav-link-my-issues" to="/myissues">My Issues</Link></li>
+                            <li><Link className="nav-link" to="/">Home</Link></li>
 
-                            <li><Link className="nav-link-accepted-issues" to="/acceptedissues">My Accepted Issues</Link></li>
+                            <li><Link className="nav-link" to="/myissues">My Issues</Link></li>
 
-                            <li><Link className="nav-link-resolved-issues" to="/resolvedissues">My Resolved Issues</Link></li>
+                            <li><Link className="nav-link" to="/acceptedissues">My Accepted Issues</Link></li>
 
-                            <li><Link className="nav-link-logout" to ="/login" onClick={this.logOut}>Logout</Link></li>
+                            <li><Link className="nav-link" to="/resolvedissues">My Resolved Issues</Link></li>
+
+                            <li><Link className="nav-link" to="/login" onClick={this.logOut}>Logout</Link></li>
+                </ul>
                         </>
                         : null
                     }
-                </ul>
             </Navbar>
         )
     }

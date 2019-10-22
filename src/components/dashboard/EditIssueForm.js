@@ -54,11 +54,7 @@ class EditIssueForm extends Component {
 	};
 
 	render() {
-		// const closeBtn = (
-		// 	<button className="close" onClick={this.toggle}>
-		// 		&times;
-		// 	</button>
-		// );
+
 		return (
 			<>
 				<ModalBody>

@@ -8,8 +8,8 @@ class MyIssuesView extends Component {
             <div>
 
                 <h1 className="header">This is the My Issues View</h1>
-                <MyIssuesList 
-                user={this.props.user}/>
+                <MyIssuesList
+                user={this.props.user} />
 
             </div>
         );

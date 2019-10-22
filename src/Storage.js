@@ -11,7 +11,7 @@ class Storage extends Component {
     user: sessionStorage.getItem("userId") !== null
   }
 
-  // Check if userId are in session storage
+  // Check if userId is in session storage
   //returns true/false
   isAuthenticated = () => sessionStorage.getItem("userId") !== null
 

@@ -130,7 +130,7 @@ class Login extends Component {
                     </Modal>
 
                     {/* <Register /> calls the component Register and its contents from Register.js to display on the login page. */}
-                    <Register triggerRender={this.props.triggerRender}/>
+                    <Register triggerRender={this.props.triggerRender} {...this.props}/>
                 </div>
             </div>
         );

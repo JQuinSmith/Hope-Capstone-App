@@ -29,7 +29,7 @@ class MyIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues", this.activeUserId).then(issues => {
+    getData = () => APIManager.getAll("issues").then(issues => {
         this.setState({
             issues: issues
         });
@@ -37,7 +37,7 @@ class MyIssuesList extends Component {
 
     componentDidMount() {
         //getAll from APIManager and hang on to that data; put it in state
-        APIManager.getAll("issues", this.activeUserId).then(issues => {
+        APIManager.getAllMy("issues", this.activeUserId).then(issues => {
             this.setState({
                 issues: issues
             });
