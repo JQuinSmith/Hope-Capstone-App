@@ -79,7 +79,7 @@ class IssueCard extends Component {
 							: null
 						}
 
-						{this.props.activeUserId === this.props.helpingUserId ?
+						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === false ?
 							<>
 								<div className="card-buttons">
 
@@ -88,6 +88,7 @@ class IssueCard extends Component {
 										onClick={() => {
 											if  (window.confirm("Change your mind?")){
 												this.lendAHand(this.props.issueId, this.props.issueId, null);
+												this.completeIssue(this.props.issueId, this.props.issueId, false);
 											} else { }
 										}}
 									>Drop Issue
@@ -149,7 +150,11 @@ class IssueCard extends Component {
 							Edit issue
 							</ModalHeader>
 						<ModalBody>
-							<EditIssueForm {...this.props} issueId={this.props.issue.id} getData={this.props.getData} toggle={this.toggle} />
+							<EditIssueForm
+							 {...this.props}
+							 issueId={this.props.issue.id}
+							 getData={this.props.getData}
+							 toggle={this.toggle} />
 						</ModalBody>
 
 

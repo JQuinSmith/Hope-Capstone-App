@@ -16,6 +16,10 @@ export default {
       return fetch(`${remoteURL}/${resource}?helpingUserId=${helpingUserId}`).then(result => result.json())
     },
 
+    getAllMyResolved(resource, userId) {
+      return fetch(`${remoteURL}/${resource}?issueComplete=true&helpingUserId=${userId}`).then(result => result.json())
+    },
+
     delete(resource ,id) {
       return fetch(`${remoteURL}/${resource}/${id}`, {
         method: "DELETE"

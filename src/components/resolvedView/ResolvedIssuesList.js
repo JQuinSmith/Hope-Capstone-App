@@ -1,6 +1,6 @@
 // Purpose of the file to display all issues
 import React, { Component } from "react";
-// import IssueCard from "../dashboard/IssueCard";
+import IssueCard from "../dashboard/IssueCard";
 import APIManager from "../../modules/APIManager";
 
 class ResolvedIssuesList extends Component {
@@ -29,7 +29,7 @@ class ResolvedIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues", this.activeUserId).then(issues => {
+    getData = () => APIManager.getAllMyResolved("issues", this.activeUserId).then(issues => {
         this.setState({
             issues: issues
         });
@@ -37,7 +37,7 @@ class ResolvedIssuesList extends Component {
 
     componentDidMount() {
         //getAll from APIManager and hang on to that data; put it in state
-        APIManager.getAll("issues", this.activeUserId).then(issues => {
+        APIManager.getAllMyResolved("issues", this.activeUserId).then(issues => {
             this.setState({
                 issues: issues
             });
@@ -52,18 +52,21 @@ class ResolvedIssuesList extends Component {
                         <h2>Resolved Issues List</h2>
                     </div>
                     <div className="issue-container-cards">
-                        {/* {this.state.issues.map(issue => (
+                        {this.state.issues.map(issue => (
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
+                                issueId={issue.id}
                                 deleteIssue={this.deleteIssue}
                                 user={this.props.user}
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}
+                                helpingUserId={issue.helpingUserId}
+                                issueComplete={issue.issueComplete}
                                 {...this.props}
                                 getData={this.getData}
                             />
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </>
