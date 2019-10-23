@@ -51,5 +51,15 @@ export default {
       },
       body: JSON.stringify({helpingUserId: helpingUser})
     }).then(data => data.json());
+  },
+
+  complete(resource, userId, issueComplete) {
+    return fetch(`${remoteURL}/${resource}/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({issueComplete: issueComplete})
+    }).then(data => data.json());
   }
 }

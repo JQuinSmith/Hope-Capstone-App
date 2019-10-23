@@ -30,7 +30,7 @@ class AcceptedIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues", this.activeUserId).then(issues => {
+    getData = () => APIManager.getAllMyAccepted("issues", this.activeUserId).then(issues => {
         this.setState({
             issues: issues
         });

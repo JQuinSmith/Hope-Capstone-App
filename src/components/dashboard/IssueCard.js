@@ -35,6 +35,13 @@ class IssueCard extends Component {
 				)));
 	}
 
+	completeIssue = (issueId, id, issueComplete) => {
+		APIManager.get("issues", issueId)
+			.then((APIManager.complete("issues", id, issueComplete)
+				.then(() => { this.props.getData() }
+				)));
+	}
+
 	render() {
 		const closeBtn = (
 			<button className="close" onClick={this.toggle}>
@@ -58,15 +65,15 @@ class IssueCard extends Component {
 							<>
 								<div className="card-buttons">
 									<Button color="primary"
-									type="button" className="accept-issue"
-									onClick={() => {
-										if (window.confirm("Lend this person a hand?")) {
-											console.log(this.props.issueId)
-											this.lendAHand(this.props.issueId, this.props.issueId, this.activeUserId);
-										}
-										else { }
-									}}
-								>Lend a Hand?</Button>
+										type="button" className="accept-issue"
+										onClick={() => {
+											if (window.confirm("Lend this person a hand?")) {
+												console.log(this.props.issue.id)
+												this.lendAHand(this.props.issue.id, this.props.issue.id, this.activeUserId);
+											}
+											else { }
+										}}
+									>Lend a Hand?</Button>
 								</div>
 							</>
 							: null
@@ -79,14 +86,18 @@ class IssueCard extends Component {
 									<Button color="danger"
 										type="button" className="cancel-issue"
 										onClick={() => {
-											window.confirm("Change your mind?")
+											if  (window.confirm("Change your mind?")){
+												this.lendAHand(this.props.issueId, this.props.issueId, null);
+											} else { }
 										}}
 									>Drop Issue
 									</Button>
-									<Button color="primary"
+									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
-											window.confirm("Did you lend a hand?")
+											if (window.confirm("Did you lend a hand?")) {
+												this.completeIssue(this.props.issueId, this.props.issueId, true);
+											} else { }
 										}}
 									>Task Complete!
 									</Button>
