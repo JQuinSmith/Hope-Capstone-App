@@ -86,7 +86,7 @@ class IssueCard extends Component {
 									<Button color="danger"
 										type="button" className="cancel-issue"
 										onClick={() => {
-											if  (window.confirm("Change your mind?")){
+											if (window.confirm("Change your mind?")) {
 												this.lendAHand(this.props.issueId, this.props.issueId, null);
 												this.completeIssue(this.props.issueId, this.props.issueId, false);
 											} else { }
@@ -101,6 +101,44 @@ class IssueCard extends Component {
 											} else { }
 										}}
 									>Task Complete!
+									</Button>
+								</div>
+							</>
+							: null
+						}
+
+						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
+
+							<>
+								<div className="card-buttons">
+
+									<Button color="success"
+										type="button" className="complete-issue"
+										onClick={() => {
+											if (window.confirm("Did you lend a hand?")) {
+												this.completeIssue(this.props.issueId, this.props.issueId, true);
+											} else { }
+										}}
+									>Add Comments!
+									</Button>
+								</div>
+							</>
+							: null
+						}
+
+						{this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
+
+							<>
+								<div className="card-buttons">
+
+									<Button color="success"
+										type="button" className="complete-issue"
+										onClick={() => {
+											if (window.confirm("Did you lend a hand?")) {
+												this.completeIssue(this.props.issueId, this.props.issueId, true);
+											} else { }
+										}}
+									>Add Comments!
 									</Button>
 								</div>
 							</>
@@ -151,10 +189,10 @@ class IssueCard extends Component {
 							</ModalHeader>
 						<ModalBody>
 							<EditIssueForm
-							 {...this.props}
-							 issueId={this.props.issue.id}
-							 getData={this.props.getData}
-							 toggle={this.toggle} />
+								{...this.props}
+								issueId={this.props.issue.id}
+								getData={this.props.getData}
+								toggle={this.toggle} />
 						</ModalBody>
 
 
