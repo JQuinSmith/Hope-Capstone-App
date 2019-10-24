@@ -1,11 +1,11 @@
 const remoteURL = "http://localhost:5002"
 
 export default {
-    get(resource, id) {
+    get(resource, id) {console.log(`${remoteURL}/${resource}/${id}`)
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
     getAll(resource){
-      return fetch (`${remoteURL}/${resource}`).then(result => result.json())
+      return fetch (`${remoteURL}/${resource}?issueComplete=false`).then(result => result.json())
     },
 
     getAllMy(resource, userId) {
@@ -20,7 +20,7 @@ export default {
       return fetch(`${remoteURL}/${resource}?issueComplete=true&helpingUserId=${userId}`).then(result => result.json())
     },
 
-    delete(resource ,id) {
+    delete(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`, {
         method: "DELETE"
     })

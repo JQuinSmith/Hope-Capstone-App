@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
+import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 
 
@@ -12,12 +13,19 @@ class IssueCard extends Component {
 		helpingUserId: null,
 		issueId: "",
 		modal: false,
+		commentModal: false
 	};
 
 	toggle = () => {
 		this.setState(prevState => ({
 			modal: !prevState.modal
 		}));
+	}
+
+	commentToggle = () =>{
+		this.setState(prevState => ({
+			commentModal: !prevState.commentModal
+		}))
 	}
 
 	activeUserId = parseInt(sessionStorage.getItem("userId"))
@@ -115,9 +123,7 @@ class IssueCard extends Component {
 									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
-											if (window.confirm("Did you lend a hand?")) {
-												this.completeIssue(this.props.issueId, this.props.issueId, true);
-											} else { }
+											this.commentToggle();
 										}}
 									>Add Comments!
 									</Button>
@@ -134,9 +140,7 @@ class IssueCard extends Component {
 									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
-											if (window.confirm("Did you lend a hand?")) {
-												this.completeIssue(this.props.issueId, this.props.issueId, true);
-											} else { }
+											this.commentToggle();
 										}}
 									>Add Comments!
 									</Button>
@@ -197,6 +201,28 @@ class IssueCard extends Component {
 
 
 					</Modal>
+
+					<Modal
+						isOpen={this.state.commentModal}
+						toggle={this.commentToggle}
+						className={this.props.className}
+					>
+						<ModalHeader
+							toggle={this.commentToggle}
+							close={closeBtn}>
+							Leave a Comment!
+							</ModalHeader>
+						<ModalBody>
+							<CompleteIssueForm
+								{...this.props}
+								issueId={this.props.issue.id}
+								getData={this.props.getData}
+								toggle={this.commentToggle} />
+						</ModalBody>
+
+
+					</Modal>
+
 
 				</div>
 
