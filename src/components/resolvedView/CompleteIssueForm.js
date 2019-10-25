@@ -5,7 +5,7 @@ import "../dashboard/issues.css";
 
 class CompleteIssueForm extends Component {
     state = {
-        comment: {},
+        comment: [],
         commentInput: "",
         loadingStatus: true,
         modal: false,
@@ -20,25 +20,25 @@ class CompleteIssueForm extends Component {
 
     addComment = evt => {
         evt.preventDefault();
-        this.props.toggle();
-        this.setState({ loadingStatus: true });
+        // this.props.toggle();
+        // this.setState({ loadingStatus: true });
         const addedComment = {
             userId: this.state.activeUser,
             issueId: this.props.issueId,
             comment: this.state.commentInput
         };
-        console.log(addedComment)
         APIManager.post("comments", addedComment)
             .then((responseComments => {
                 this.setState({
                     comment: responseComments
                 });
-                console.log(this.state.comment.comment);
             }))
+            .then(() => console.log("this is state once set", this.state.comment))
     };
 
 
     componentDidMount() {
+        console.log("this is component did mount",this.state.comment)
         return APIManager.get("issues", this.props.issueId)
             .then(
                 issue => {
@@ -61,7 +61,7 @@ class CompleteIssueForm extends Component {
     };
 
     render() {
-
+        console.log("this is render",this.state.comment)
         return (
             <>
                 <ModalBody>
@@ -79,7 +79,7 @@ class CompleteIssueForm extends Component {
                             <p>{this.state.issueDeadline}</p>
 
                             <h5 htmlFor="comment">Comments</h5>
-                            <p>{this.state.comment.comment}</p>
+                           { this.state.comment.map( oneComment => <p>{oneComment.comment}</p>)}
 
                         </div>
                         <div className="alignRight">

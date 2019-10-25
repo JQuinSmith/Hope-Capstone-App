@@ -12,6 +12,7 @@ class IssueCard extends Component {
 	state = {
 		helpingUserId: null,
 		issueId: "",
+		comments: [],
 		modal: false,
 		commentModal: false
 	};
@@ -50,6 +51,18 @@ class IssueCard extends Component {
 				)));
 	}
 
+	componentDidMount() {
+		APIManager.getComment("comments", this.props.issueId)
+			.then(
+				comment => {
+					this.setState({
+						comments: comment,
+						loadingStatus: false
+					})
+				}
+			)
+	}
+
 	render() {
 		const closeBtn = (
 			<button className="close" onClick={this.toggle}>
@@ -68,6 +81,7 @@ class IssueCard extends Component {
 						<p><em>Additional Details:</em><br></br>{this.props.issue.issueDescription}</p>
 
 						<p>Deadline: {this.props.issue.issueDeadline}</p>
+
 
 
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
@@ -119,7 +133,8 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
-								<p>Comments:</p>
+								<p>Comments: </p>
+								{this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
 								<div className="card-buttons">
 
 									<Button color="secondary"
