@@ -61,7 +61,7 @@ class MyIssuesList extends Component {
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}
                                 {...this.props}
-                                // getData={this.getData}
+                                getData={this.getData}
                             />
                         ))}
                     </div>

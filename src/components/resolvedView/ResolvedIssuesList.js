@@ -7,6 +7,7 @@ class ResolvedIssuesList extends Component {
     //define what this component needs to render
     state = {
         issues: [],
+        comments: [],
         modal: false
     };
 
@@ -29,15 +30,17 @@ class ResolvedIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAllMyResolved("issues", this.activeUserId).then(issues => {
-        this.setState({
-            issues: issues
+    getData = () => APIManager.getAllMyResolved("issues", this.activeUserId)
+        .then(issues => {
+            this.setState({
+                issues: issues
+            });
         });
-    });
 
     componentDidMount() {
         //getAll from APIManager and hang on to that data; put it in state
-        APIManager.getAllMyResolved("issues", this.activeUserId).then(issues => {
+        APIManager.getAllMyResolved("issues", this.activeUserId)
+            .then(issues => {
             this.setState({
                 issues: issues
             });

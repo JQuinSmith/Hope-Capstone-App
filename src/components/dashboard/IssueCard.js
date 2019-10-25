@@ -22,7 +22,7 @@ class IssueCard extends Component {
 		}));
 	}
 
-	commentToggle = () =>{
+	commentToggle = () => {
 		this.setState(prevState => ({
 			commentModal: !prevState.commentModal
 		}))
@@ -68,6 +68,7 @@ class IssueCard extends Component {
 						<p><em>Additional Details:</em><br></br>{this.props.issue.issueDescription}</p>
 
 						<p>Deadline: {this.props.issue.issueDeadline}</p>
+
 
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
@@ -118,8 +119,16 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
+								<p>Comments:</p>
 								<div className="card-buttons">
 
+									<Button color="secondary"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Edit Comments!
+									</Button>
 									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
@@ -136,7 +145,13 @@ class IssueCard extends Component {
 
 							<>
 								<div className="card-buttons">
-
+									<Button color="secondary"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Edit Comments!
+									</Button>
 									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
@@ -210,7 +225,7 @@ class IssueCard extends Component {
 						<ModalHeader
 							toggle={this.commentToggle}
 							close={closeBtn}>
-							Leave a Comment!
+							Issue Resolved - Leave a Comment!
 							</ModalHeader>
 						<ModalBody>
 							<CompleteIssueForm
