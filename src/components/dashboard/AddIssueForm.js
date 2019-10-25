@@ -28,8 +28,6 @@ class AddIssueForm extends Component {
 
     activeUserId = parseInt(sessionStorage.getItem("userId"))
 
-    //   const element = <FontAwesomeIcon icon={fas fa-plus-circle fa-1x} />
-
     toggle = () => {
         this.setState(prevState => ({
             modal: !prevState.modal

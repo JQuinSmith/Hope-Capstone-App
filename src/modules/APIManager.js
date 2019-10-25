@@ -4,8 +4,11 @@ export default {
     get(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
+    getComment(resource, id) {
+      return fetch(`${remoteURL}/${resource}?issueId=${id}`).then(result => result.json())
+    },
     getAll(resource){
-      return fetch (`${remoteURL}/${resource}`).then(result => result.json())
+      return fetch (`${remoteURL}/${resource}?issueComplete=false`).then(result => result.json())
     },
 
     getAllMy(resource, userId) {
@@ -13,10 +16,14 @@ export default {
     },
 
     getAllMyAccepted(resource, helpingUserId) {
-      return fetch(`${remoteURL}/${resource}?helpingUserId=${helpingUserId}`).then(result => result.json())
+      return fetch(`${remoteURL}/${resource}?issueComplete=false&helpingUserId=${helpingUserId}`).then(result => result.json())
     },
 
-    delete(resource ,id) {
+    getAllMyResolved(resource, userId) {
+      return fetch(`${remoteURL}/${resource}?issueComplete=true&helpingUserId=${userId}`).then(result => result.json())
+    },
+
+    delete(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`, {
         method: "DELETE"
     })
@@ -50,6 +57,16 @@ export default {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({helpingUserId: helpingUser})
+    }).then(data => data.json());
+  },
+
+  complete(resource, userId, issueComplete) {
+    return fetch(`${remoteURL}/${resource}/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({issueComplete: issueComplete})
     }).then(data => data.json());
   }
 }

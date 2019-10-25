@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
+import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 
 
@@ -11,13 +12,21 @@ class IssueCard extends Component {
 	state = {
 		helpingUserId: null,
 		issueId: "",
+		comments: [],
 		modal: false,
+		commentModal: false
 	};
 
 	toggle = () => {
 		this.setState(prevState => ({
 			modal: !prevState.modal
 		}));
+	}
+
+	commentToggle = () => {
+		this.setState(prevState => ({
+			commentModal: !prevState.commentModal
+		}))
 	}
 
 	activeUserId = parseInt(sessionStorage.getItem("userId"))
@@ -33,6 +42,25 @@ class IssueCard extends Component {
 			.then((APIManager.insert("issues", id, helpingUser)
 				.then(() => { this.props.getData() }
 				)));
+	}
+
+	completeIssue = (issueId, id, issueComplete) => {
+		APIManager.get("issues", issueId)
+			.then((APIManager.complete("issues", id, issueComplete)
+				.then(() => { this.props.getData() }
+				)));
+	}
+
+	componentDidMount() {
+		APIManager.getComment("comments", this.props.issueId)
+			.then(
+				comment => {
+					this.setState({
+						comments: comment,
+						loadingStatus: false
+					})
+				}
+			)
 	}
 
 	render() {
@@ -54,41 +82,97 @@ class IssueCard extends Component {
 
 						<p>Deadline: {this.props.issue.issueDeadline}</p>
 
+
+
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
 								<div className="card-buttons">
 									<Button color="primary"
-									type="button" className="accept-issue"
-									onClick={() => {
-										if (window.confirm("Lend this person a hand?")) {
-											console.log(this.props.issueId)
-											this.lendAHand(this.props.issueId, this.props.issueId, this.activeUserId);
-										}
-										else { }
-									}}
-								>Lend a Hand?</Button>
+										type="button" className="accept-issue"
+										onClick={() => {
+											if (window.confirm("Lend this person a hand?")) {
+												console.log(this.props.issue.id)
+												this.lendAHand(this.props.issue.id, this.props.issue.id, this.activeUserId);
+											}
+											else { }
+										}}
+									>Lend a Hand?</Button>
 								</div>
 							</>
 							: null
 						}
 
-						{this.props.activeUserId === this.props.helpingUserId ?
+						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === false ?
 							<>
 								<div className="card-buttons">
 
 									<Button color="danger"
 										type="button" className="cancel-issue"
 										onClick={() => {
-											window.confirm("Change your mind?")
+											if (window.confirm("Change your mind?")) {
+												this.lendAHand(this.props.issueId, this.props.issueId, null);
+												this.completeIssue(this.props.issueId, this.props.issueId, false);
+											} else { }
 										}}
 									>Drop Issue
 									</Button>
-									<Button color="primary"
+									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
-											window.confirm("Did you lend a hand?")
+											if (window.confirm("Did you lend a hand?")) {
+												this.completeIssue(this.props.issueId, this.props.issueId, true);
+											} else { }
 										}}
 									>Task Complete!
+									</Button>
+								</div>
+							</>
+							: null
+						}
+
+						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
+
+							<>
+								<p>Comments: </p>
+								{this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+								<div className="card-buttons">
+
+									<Button color="secondary"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Edit Comments!
+									</Button>
+									<Button color="success"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Add Comments!
+									</Button>
+								</div>
+							</>
+							: null
+						}
+
+						{this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
+
+							<>
+								<div className="card-buttons">
+									<Button color="secondary"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Edit Comments!
+									</Button>
+									<Button color="success"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Add Comments!
 									</Button>
 								</div>
 							</>
@@ -138,11 +222,37 @@ class IssueCard extends Component {
 							Edit issue
 							</ModalHeader>
 						<ModalBody>
-							<EditIssueForm {...this.props} issueId={this.props.issue.id} getData={this.props.getData} toggle={this.toggle} />
+							<EditIssueForm
+								{...this.props}
+								issueId={this.props.issue.id}
+								getData={this.props.getData}
+								toggle={this.toggle} />
 						</ModalBody>
 
 
 					</Modal>
+
+					<Modal
+						isOpen={this.state.commentModal}
+						toggle={this.commentToggle}
+						className={this.props.className}
+					>
+						<ModalHeader
+							toggle={this.commentToggle}
+							close={closeBtn}>
+							Issue Resolved - Leave a Comment!
+							</ModalHeader>
+						<ModalBody>
+							<CompleteIssueForm
+								{...this.props}
+								issueId={this.props.issue.id}
+								getData={this.props.getData}
+								toggle={this.commentToggle} />
+						</ModalBody>
+
+
+					</Modal>
+
 
 				</div>
 

@@ -30,7 +30,7 @@ class AcceptedIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues", this.activeUserId).then(issues => {
+    getData = () => APIManager.getAllMyAccepted("issues", this.activeUserId).then(issues => {
         this.setState({
             issues: issues
         });
@@ -64,7 +64,7 @@ class AcceptedIssuesList extends Component {
                                 issueUserId={issue.userId}
                                 helpingUserId={issue.helpingUserId}
                                 {...this.props}
-                                getData={this.getData}
+                                // getData={this.getData}
                             />
                         ))}
                     </div>
