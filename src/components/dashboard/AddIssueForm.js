@@ -2,10 +2,15 @@
 
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "../dashboard/issues.css";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { fas fa-plus-circle fa-1x } from '@fortawesome/free-solid-svg-icons'
+
+const CLOUDINARY_UPLOAD_PRESET = 'ml_default';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hopeapp/upload';
 
 class AddIssueForm extends Component {
 
@@ -17,7 +22,7 @@ class AddIssueForm extends Component {
         issueDeadline: "",
         userId: "",
         helpingUserId: null,
-        imageURL: null,
+        uploadedFileCloudinaryUrl: '',
         latitudeValue: null,
         longitudeValue: null,
         locationName: null,
@@ -27,6 +32,33 @@ class AddIssueForm extends Component {
     };
 
     activeUserId = parseInt(sessionStorage.getItem("userId"))
+
+
+    onImageDrop(files) {
+        this.setState({
+            uploadedFile: files[0]
+        });
+
+        this.handleImageUpload(files[0]);
+    }
+
+    handleImageUpload(file) {
+        let upload = request.post(CLOUDINARY_UPLOAD_URL)
+            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+            .field('file', file);
+
+        upload.end((err, response) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (response.body.secure_url !== '') {
+                this.setState({
+                    uploadedFileCloudinaryUrl: response.body.secure_url
+                });
+            }
+        });
+    }
 
     toggle = () => {
         this.setState(prevState => ({
@@ -121,27 +153,48 @@ class AddIssueForm extends Component {
                                     />
 
                                     <label htmlFor="issue">Have an Image?</label>
-                                    <input type="file"
-                                        id="issueImage" name="issueImage"
-                                        accept="image/png, image/jpeg" />
+                                    <Dropzone
+                                        onDrop={this.onImageDrop.bind(this)}
+                                        accept="image/*"
+                                        multiple={false}>
+                                        {({ getRootProps, getInputProps }) => {
+                                            return (
+                                                <div
+                                                    {...getRootProps()}
+                                                >
+                                                    <input {...getInputProps()} />
+                                                    {
+                                                        <p>Try dropping some files here, or click to select files to upload.</p>
+                                                    }
+                                                </div>
+                                            )
+                                        }}
+                                    </Dropzone>
                                 </div>
                                 <div className="alignRight">
+                                </div>
+                                <div>
+                                    {this.state.uploadedFileCloudinaryUrl === '' ? null :
+                                        <div>
+                                            <p>{this.state.uploadedFile.name}</p>
+                                            <img src={this.state.uploadedFileCloudinaryUrl} />
+                                        </div>}
                                 </div>
                             </fieldset>
                         </form>
                     </ModalBody>
-                    <ModalFooter>
-                        <Button
-                            className="add"
-                            onClick={this.addIssue}
-                        >
-                            Add
+                <ModalFooter>
+                    <Button
+                        className="add"
+                        onClick={this.addIssue}
+                    >
+                        Add
 						</Button>{" "}
-                        <Button className="cancel" onClick={this.toggle}>
-                            Cancel
+                    <Button className="cancel" onClick={this.toggle}>
+                        Cancel
 						</Button>
-                    </ModalFooter>
-                </Modal>
+                </ModalFooter>
+            </Modal>
             </>
         );
     }
