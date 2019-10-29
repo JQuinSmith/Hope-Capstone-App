@@ -17,9 +17,32 @@
     color: #444444
 }
 
+.cloudinaryContainer{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 156px;
+
+}
+
+.cloudinaryImg {
+    max-width: 300px;
+    border-radius: 3px;
+}
+
 
 .issue-card-content {
     padding: 10px 0px 0px 15px;
+
+}
+
+.issue-card-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.issue-card-body {
+    display: flex;
+    flex-direction: column;
 }
 
 .delete-issue {

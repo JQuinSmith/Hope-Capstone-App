@@ -9,8 +9,8 @@ import "../dashboard/issues.css";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { fas fa-plus-circle fa-1x } from '@fortawesome/free-solid-svg-icons'
 
-const CLOUDINARY_UPLOAD_PRESET = 'ml_default';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hopeapp/upload';
+const uploadPreset = 'hopeapp';
+const uploadURL = 'https://api.cloudinary.com/v1_1/hopeapp/image/upload';
 
 class AddIssueForm extends Component {
 
@@ -22,7 +22,8 @@ class AddIssueForm extends Component {
         issueDeadline: "",
         userId: "",
         helpingUserId: null,
-        uploadedFileCloudinaryUrl: '',
+        imageURL: "",
+        uploadedFile: null,
         latitudeValue: null,
         longitudeValue: null,
         locationName: null,
@@ -43,8 +44,8 @@ class AddIssueForm extends Component {
     }
 
     handleImageUpload(file) {
-        let upload = request.post(CLOUDINARY_UPLOAD_URL)
-            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+        let upload = request.post(uploadURL)
+            .field('upload_preset', uploadPreset)
             .field('file', file);
 
         upload.end((err, response) => {
@@ -54,7 +55,7 @@ class AddIssueForm extends Component {
 
             if (response.body.secure_url !== '') {
                 this.setState({
-                    uploadedFileCloudinaryUrl: response.body.secure_url
+                    imageURL: response.body.secure_url
                 });
             }
         });
@@ -86,6 +87,7 @@ class AddIssueForm extends Component {
                 issueDeadline: this.state.issueDeadline,
                 issueComplete: this.state.issueComplete,
                 imageURL: this.state.imageURL,
+                uploadedFile: this.state.uploadedFile,
                 helpingUserId: this.state.helpingUserId,
                 latitudeValue: this.state.latitudeValue,
                 longitudeValue: this.state.longitudeValue,
@@ -174,10 +176,10 @@ class AddIssueForm extends Component {
                                 <div className="alignRight">
                                 </div>
                                 <div>
-                                    {this.state.uploadedFileCloudinaryUrl === '' ? null :
+                                    {this.state.imageURL === '' ? null :
                                         <div>
                                             <p>{this.state.uploadedFile.name}</p>
-                                            <img src={this.state.uploadedFileCloudinaryUrl} />
+                                            <img src={this.state.imageURL} />
                                         </div>}
                                 </div>
                             </fieldset>

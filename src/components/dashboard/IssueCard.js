@@ -30,7 +30,7 @@ class IssueCard extends Component {
 	}
 
 	activeUserId = parseInt(sessionStorage.getItem("userId"))
-	activeUsername =(sessionStorage.getItem("name"))
+	activeUsername = (sessionStorage.getItem("name"))
 
 	handleDelete = id => {
 		APIManager.delete("issues", id)
@@ -74,17 +74,22 @@ class IssueCard extends Component {
 			<>
 				<div className="issue-card">
 					<div className="issue-card-content">
-						<h3>
-							{this.props.issue.issueName}
-							<span className="card-issueTitle"></span>
-						</h3>
+						<div className="issue-card-details">
+							<div className="issue-card-body">
+								<h3>
+									{this.props.issue.issueName}
+									<span className="card-issueTitle"></span>
+								</h3>
 
-						<p><em>Additional Details:</em><br></br>{this.props.issue.issueDescription}</p>
+								<p><em>Additional Details:</em><br></br>{this.props.issue.issueDescription}</p>
 
-						<p>Deadline: {this.props.issue.issueDeadline}</p>
+								<p>Deadline: {this.props.issue.issueDeadline}</p>
+							</div>
 
-
-
+							<div className="cloudinaryContainer">
+								<img src={this.props.issue.imageURL} className="cloudinaryImg" />
+							</div>
+						</div>
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
 								<div className="card-buttons">
@@ -187,6 +192,7 @@ class IssueCard extends Component {
 							: null
 						}
 					</div>
+
 
 
 					<Modal
