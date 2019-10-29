@@ -2,10 +2,15 @@
 
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "../dashboard/issues.css";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { fas fa-plus-circle fa-1x } from '@fortawesome/free-solid-svg-icons'
+
+const uploadPreset = 'hopeapp';
+const uploadURL = 'https://api.cloudinary.com/v1_1/hopeapp/image/upload';
 
 class AddIssueForm extends Component {
 
@@ -17,7 +22,8 @@ class AddIssueForm extends Component {
         issueDeadline: "",
         userId: "",
         helpingUserId: null,
-        imageURL: null,
+        imageURL: "",
+        uploadedFile: null,
         latitudeValue: null,
         longitudeValue: null,
         locationName: null,
@@ -27,6 +33,33 @@ class AddIssueForm extends Component {
     };
 
     activeUserId = parseInt(sessionStorage.getItem("userId"))
+
+
+    onImageDrop(files) {
+        this.setState({
+            uploadedFile: files[0]
+        });
+
+        this.handleImageUpload(files[0]);
+    }
+
+    handleImageUpload(file) {
+        let upload = request.post(uploadURL)
+            .field('upload_preset', uploadPreset)
+            .field('file', file);
+
+        upload.end((err, response) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (response.body.secure_url !== '') {
+                this.setState({
+                    imageURL: response.body.secure_url
+                });
+            }
+        });
+    }
 
     toggle = () => {
         this.setState(prevState => ({
@@ -54,6 +87,7 @@ class AddIssueForm extends Component {
                 issueDeadline: this.state.issueDeadline,
                 issueComplete: this.state.issueComplete,
                 imageURL: this.state.imageURL,
+                uploadedFile: this.state.uploadedFile,
                 helpingUserId: this.state.helpingUserId,
                 latitudeValue: this.state.latitudeValue,
                 longitudeValue: this.state.longitudeValue,
@@ -120,28 +154,48 @@ class AddIssueForm extends Component {
                                         value={this.state.issueDeadline}
                                     />
 
-                                    <label htmlFor="issue">Have an Image?</label>
-                                    <input type="file"
-                                        id="issueImage" name="issueImage"
-                                        accept="image/png, image/jpeg" />
+                                    <Dropzone
+                                        onDrop={this.onImageDrop.bind(this)}
+                                        accept="image/*"
+                                        multiple={false}>
+                                        {({ getRootProps, getInputProps }) => {
+                                            return (
+                                                <div className="dropped-image"
+                                                    {...getRootProps()}
+                                                >
+                                                    <input {...getInputProps()} />
+                                                    {
+                                                        <p>Try dropping some files here, or click to select files to upload.</p>
+                                                    }
+                                                </div>
+                                            )
+                                        }}
+                                    </Dropzone>
                                 </div>
                                 <div className="alignRight">
+                                </div>
+                                <div>
+                                    {this.state.imageURL === '' ? null :
+                                        <div>
+                                            <p>{this.state.uploadedFile.name}</p>
+                                            <img src={this.state.imageURL} />
+                                        </div>}
                                 </div>
                             </fieldset>
                         </form>
                     </ModalBody>
-                    <ModalFooter>
-                        <Button
-                            className="add"
-                            onClick={this.addIssue}
-                        >
-                            Add
+                <ModalFooter>
+                    <Button
+                        className="add"
+                        onClick={this.addIssue}
+                    >
+                        Add
 						</Button>{" "}
-                        <Button className="cancel" onClick={this.toggle}>
-                            Cancel
+                    <Button className="cancel" onClick={this.toggle}>
+                        Cancel
 						</Button>
-                    </ModalFooter>
-                </Modal>
+                </ModalFooter>
+            </Modal>
             </>
         );
     }

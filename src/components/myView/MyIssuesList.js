@@ -7,6 +7,7 @@ class MyIssuesList extends Component {
     //define what this component needs to render
     state = {
         issues: [],
+        comments: [],
         modal: false
     };
 
@@ -41,6 +42,14 @@ class MyIssuesList extends Component {
             this.setState({
                 issues: issues
             });
+            APIManager.getComment("comments", this.activeUserId)
+                .then(
+                    comment => {
+                        this.setState({
+                            comments: comment,
+                            loadingStatus: false
+                        })
+                    });
         });
     }
 

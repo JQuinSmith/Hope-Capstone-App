@@ -64,7 +64,7 @@ class AcceptedIssuesList extends Component {
                                 issueUserId={issue.userId}
                                 helpingUserId={issue.helpingUserId}
                                 {...this.props}
-                                // getData={this.getData}
+                                getData={this.getData}
                             />
                         ))}
                     </div>

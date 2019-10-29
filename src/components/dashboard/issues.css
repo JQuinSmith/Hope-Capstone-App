@@ -11,15 +11,41 @@
 
 .issue-card {
     margin: 20px 0px 0px 0px;
-    transition: .3s;
+    max-width: 50%;
+    display: flex;
+    flex-wrap: nowrap;
     border: .75px solid rgba(79, 79, 79, 0.25);
-    max-width: 45%;
     color: #444444
+}
+
+.cloudinaryContainer{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 195px;
+
+}
+
+.cloudinaryImg {
+    max-width: 285px;
+    max-height: 200px;
+    border-radius: 3px;
 }
 
 
 .issue-card-content {
     padding: 10px 0px 0px 15px;
+
+}
+
+.issue-card-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.issue-card-body {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
 }
 
 .delete-issue {
@@ -31,7 +57,9 @@
 }
 
 .accept-issue {
-    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-top: 3px;
+    padding: 6px 12px;
 }
 
 .issueAccept {
@@ -44,8 +72,16 @@
 .card-buttons {
     display: flex;
     justify-content: right;
-    margin-left: 470px;
+    float: right;
     margin-bottom: 5px;
+}
+
+.edit-comment {
+    margin-right: 5px;
+}
+
+.cancel-issue {
+    margin-right: 5px;
 }
 
 textarea {
