@@ -11,10 +11,9 @@
 
 .issue-card {
     margin: 20px 0px 0px 0px;
-    max-width: 45%;
+    max-width: 50%;
     display: flex;
     flex-wrap: nowrap;
-    transition: .3s;
     border: .75px solid rgba(79, 79, 79, 0.25);
     color: #444444
 }
@@ -22,12 +21,13 @@
 .cloudinaryContainer{
     display: flex;
     justify-content: flex-end;
-    margin-left: 156px;
+    margin-left: 195px;
 
 }
 
 .cloudinaryImg {
-    max-width: 300px;
+    max-width: 285px;
+    max-height: 200px;
     border-radius: 3px;
 }
 
@@ -45,6 +45,7 @@
 .issue-card-body {
     display: flex;
     flex-direction: column;
+    width: 200px;
 }
 
 .delete-issue {
@@ -71,8 +72,16 @@
 .card-buttons {
     display: flex;
     justify-content: right;
-    margin-left: 470px;
+    float: right;
     margin-bottom: 5px;
+}
+
+.edit-comment {
+    margin-right: 5px;
+}
+
+.cancel-issue {
+    margin-right: 5px;
 }
 
 textarea {

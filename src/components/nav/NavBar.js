@@ -25,7 +25,7 @@ class NavigationBar extends Component {
 
                 {(this.props.user) ?
                     <>
-                        <h4>Welcome, {this.activeUserName}!</h4>
+                        <h4 className="welcome-sign">Welcome, {this.activeUserName}!</h4>
                         <ul className="nav nav-pills nav-fill">
 
                             <li><Link className="nav-link" to="/">Home</Link></li>

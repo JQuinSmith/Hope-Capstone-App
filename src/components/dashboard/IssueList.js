@@ -51,7 +51,7 @@ class IssueList extends Component {
             <>
                 <div className="issues-container">
                     <div className="issues-intro">
-                        <h2>Issues List</h2>
+
                     </div>
                     <AddIssueForm
                         {...this.props}

@@ -4,6 +4,7 @@ import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
 import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
+import "../dashboard/issues.css"
 
 
 
@@ -76,13 +77,15 @@ class IssueCard extends Component {
 					<div className="issue-card-content">
 						<div className="issue-card-details">
 							<div className="issue-card-body">
-								<h3>
-									{this.props.issue.issueName}
-									<span className="card-issueTitle"></span>
-								</h3>
-
-								<p><em>Additional Details:</em><br></br>{this.props.issue.issueDescription}</p>
-
+								<span className="card-issueTitle">
+									<h4>
+										{this.props.issue.issueName}
+									</h4>
+								</span>
+								<p>
+									{this.props.issue.issueDescription}
+								</p>
+								<br></br>
 								<p>Deadline: {this.props.issue.issueDeadline}</p>
 							</div>
 
@@ -144,18 +147,18 @@ class IssueCard extends Component {
 								<div className="card-buttons">
 
 									<Button color="secondary"
-										type="button" className="complete-issue"
+										type="button" className="edit-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
-									>Edit Comments!
+									>Edit Comment
 									</Button>
 									<Button color="success"
-										type="button" className="complete-issue"
+										type="button" className="add-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
-									>Add Comments!
+									>Add Comment
 									</Button>
 								</div>
 							</>
@@ -175,14 +178,14 @@ class IssueCard extends Component {
 											this.commentToggle();
 										}}
 									>Edit Comments!
-		</Button>
+									</Button>
 									<Button color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
 											this.commentToggle();
 										}}
 									>Add Comments!
-		</Button>
+									</Button>
 								</div>
 							</>
 							: null
