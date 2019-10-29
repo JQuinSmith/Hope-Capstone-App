@@ -154,14 +154,13 @@ class AddIssueForm extends Component {
                                         value={this.state.issueDeadline}
                                     />
 
-                                    <label htmlFor="issue">Have an Image?</label>
                                     <Dropzone
                                         onDrop={this.onImageDrop.bind(this)}
                                         accept="image/*"
                                         multiple={false}>
                                         {({ getRootProps, getInputProps }) => {
                                             return (
-                                                <div
+                                                <div className="dropped-image"
                                                     {...getRootProps()}
                                                 >
                                                     <input {...getInputProps()} />

@@ -136,11 +136,11 @@ class IssueCard extends Component {
 							: null
 						}
 
-						{this.props.activeUserId === this.props.helpingUserId || this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
+						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
 								<p>Comments: </p>
-								{this.activeUsername}: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+								: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
 								<div className="card-buttons">
 
 									<Button color="secondary"
@@ -157,6 +157,32 @@ class IssueCard extends Component {
 										}}
 									>Add Comments!
 									</Button>
+								</div>
+							</>
+							: null
+						}
+
+						{this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
+
+							<>
+								<p>Comments: </p>
+								: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+								<div className="card-buttons">
+
+									<Button color="secondary"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Edit Comments!
+		</Button>
+									<Button color="success"
+										type="button" className="complete-issue"
+										onClick={() => {
+											this.commentToggle();
+										}}
+									>Add Comments!
+		</Button>
 								</div>
 							</>
 							: null

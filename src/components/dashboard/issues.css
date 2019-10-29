@@ -11,9 +11,11 @@
 
 .issue-card {
     margin: 20px 0px 0px 0px;
+    max-width: 45%;
+    display: flex;
+    flex-wrap: nowrap;
     transition: .3s;
     border: .75px solid rgba(79, 79, 79, 0.25);
-    max-width: 45%;
     color: #444444
 }
 
@@ -54,7 +56,9 @@
 }
 
 .accept-issue {
-    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-top: 3px;
+    padding: 6px 12px;
 }
 
 .issueAccept {
