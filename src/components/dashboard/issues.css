@@ -11,10 +11,11 @@
 
 .issue-card {
     margin: 20px 0px 0px 0px;
-    max-width: 52%;
+    max-width: 51%;
     display: flex;
     flex-wrap: nowrap;
-    border: .75px solid rgba(142, 142, 142, 0.25);
+    border-top: .75px solid rgba(142, 142, 142, 0.25);
+    /* border-bottom: .75px solid rgba(142, 142, 142, 0.25); */
     color: #444444;
 }
 
@@ -87,7 +88,7 @@
 
 .card-buttons {
     display: flex;
-    float: right;
+    float: left;
     margin-bottom: 5px;
 
 }

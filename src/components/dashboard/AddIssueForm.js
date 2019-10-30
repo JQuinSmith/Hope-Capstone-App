@@ -176,7 +176,7 @@ class AddIssueForm extends Component {
                                     {this.state.imageURL === '' ? null :
                                         <div>
                                             <p>{this.state.uploadedFile.name}</p>
-                                            <img className="preview-img" src={this.state.imageURL} />
+                                            <img alt="previewImg" className="preview-img" src={this.state.imageURL} />
                                         </div>}
                                 </div>
                             </fieldset>

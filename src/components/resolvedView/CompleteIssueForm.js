@@ -30,18 +30,12 @@ class CompleteIssueForm extends Component {
             comment: this.state.commentInput
         };
         APIManager.post("comments", addedComment)
-            .then(APIManager.getAll("comments"))
-            .then(responseComments =>
-                this.setState({
-                    comment: responseComments
-                })
-            )
-            .then(() => console.log("this is state once set", this.state.comment))
+        .then(() => this.props.commentStateUpdate())
+
     };
 
 
     componentDidMount() {
-        console.log("this is component did mount", this.state.comment)
         APIManager.get("issues", this.props.issueId)
             .then(
                 issue => {

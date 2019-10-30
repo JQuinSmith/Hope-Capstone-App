@@ -11,6 +11,10 @@ export default {
       return fetch (`${remoteURL}/${resource}?issueComplete=false`).then(result => result.json())
     },
 
+    getAllComments(resource){
+      return fetch (`${remoteURL}/${resource}`).then(result => result.json())
+    },
+
     getAllMy(resource, userId) {
       return fetch(`${remoteURL}/${resource}?userId=${userId}`).then(result => result.json())
     },

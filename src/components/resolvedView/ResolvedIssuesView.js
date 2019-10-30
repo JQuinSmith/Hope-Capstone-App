@@ -8,6 +8,7 @@ render() {
     return (
         <div>
             <ResolvedIssuesList
+            key={this.props.user.id}
             user={this.props.user}/>
 
         </div>

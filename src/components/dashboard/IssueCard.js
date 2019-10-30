@@ -18,6 +18,18 @@ class IssueCard extends Component {
 		commentModal: false
 	};
 
+	commentStateUpdate = () => {
+		 APIManager.getAllComments("comments")
+            .then(responseComments =>
+				{let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
+                return comments}
+            )
+			.then((filteredArray) => this.setState({comments:filteredArray}))
+
+
+
+	}
+
 	toggle = () => {
 		this.setState(prevState => ({
 			modal: !prevState.modal
@@ -90,7 +102,7 @@ class IssueCard extends Component {
 							</div>
 
 							<div className="cloudinaryContainer">
-								<img src={this.props.issue.imageURL} className="cloudinaryImg" />
+								<img alt="cloudinaryImg" src={this.props.issue.imageURL} className="cloudinaryImg" />
 							</div>
 						</div>
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
@@ -257,7 +269,9 @@ class IssueCard extends Component {
 							</ModalHeader>
 						<ModalBody>
 							<CompleteIssueForm
+							key={this.props.issue.id}
 								{...this.props}
+								commentStateUpdate={this.commentStateUpdate}
 								issueId={this.props.issue.id}
 								getData={this.props.getData}
 								toggle={this.commentToggle} />
