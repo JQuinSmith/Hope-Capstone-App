@@ -8,7 +8,6 @@ render() {
     return (
         <div>
 
-            <h1 className="header">This is the Dashboard</h1>
             <IssueList
             user={this.props.user}/>
 

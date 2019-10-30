@@ -108,7 +108,7 @@ class AddIssueForm extends Component {
         return (
             <>
                 {" "}
-                <Button className="addIssue" onClick={this.toggle}>
+                <Button outline color="secondary" className="addIssue" onClick={this.toggle}>
                     I need a hand!</Button>
                 <Modal
                     isOpen={this.state.modal}
@@ -123,7 +123,7 @@ class AddIssueForm extends Component {
                             <fieldset>
                                 <div className="formgrid">
                                     <label htmlFor="issueName">
-                                        Issue Name:
+                                        Give Your Issue a Name
 									</label>
                                     <input
                                         type="text"
@@ -133,7 +133,7 @@ class AddIssueForm extends Component {
                                         id="issueName"
                                         value={this.state.issueName}
                                     />
-
+                                    <br></br>
                                     <label htmlFor="issue">Any Details?</label>
                                     <input
                                         type="text"
@@ -143,7 +143,7 @@ class AddIssueForm extends Component {
                                         id="issueDescription"
                                         value={this.state.issueDescription}
                                     />
-
+                                    <br></br>
                                     <label htmlFor="issue">How Long Do We Have?</label>
                                     <input
                                         type="date"
@@ -153,7 +153,7 @@ class AddIssueForm extends Component {
                                         id="issueDeadline"
                                         value={this.state.issueDeadline}
                                     />
-
+                                    <br></br>
                                     <Dropzone
                                         onDrop={this.onImageDrop.bind(this)}
                                         accept="image/*"
@@ -172,13 +172,11 @@ class AddIssueForm extends Component {
                                         }}
                                     </Dropzone>
                                 </div>
-                                <div className="alignRight">
-                                </div>
                                 <div>
                                     {this.state.imageURL === '' ? null :
                                         <div>
                                             <p>{this.state.uploadedFile.name}</p>
-                                            <img src={this.state.imageURL} />
+                                            <img className="preview-img" src={this.state.imageURL} />
                                         </div>}
                                 </div>
                             </fieldset>

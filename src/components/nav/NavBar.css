@@ -1,5 +1,7 @@
 .welcome-sign {
   margin-left: 15px;
+  color: #444444;
+
 }
 
 
@@ -9,7 +11,7 @@ ul {
   }
 
   nav {
-    box-shadow: 0 8px 20px 0 rgba(0.4,0.4,0.4,0.2);
-    padding-bottom: 20px;
+    border-bottom: .75px solid rgba(142, 142, 142, 0.25);
+    margin-top: 20px;
 
   }

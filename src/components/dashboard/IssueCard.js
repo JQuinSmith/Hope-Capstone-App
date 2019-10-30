@@ -78,9 +78,9 @@ class IssueCard extends Component {
 						<div className="issue-card-details">
 							<div className="issue-card-body">
 								<span className="card-issueTitle">
-									<h4>
+									<h5>
 										{this.props.issue.issueName}
-									</h4>
+									</h5>
 								</span>
 								<p>
 									{this.props.issue.issueDescription}
@@ -96,7 +96,7 @@ class IssueCard extends Component {
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
 								<div className="card-buttons">
-									<Button color="primary"
+									<Button outline color="primary"
 										type="button" className="accept-issue"
 										onClick={() => {
 											if (window.confirm("Lend this person a hand?")) {
@@ -115,7 +115,7 @@ class IssueCard extends Component {
 							<>
 								<div className="card-buttons">
 
-									<Button color="danger"
+									<Button outline color="danger"
 										type="button" className="cancel-issue"
 										onClick={() => {
 											if (window.confirm("Change your mind?")) {
@@ -125,7 +125,7 @@ class IssueCard extends Component {
 										}}
 									>Drop Issue
 									</Button>
-									<Button color="success"
+									<Button outline color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
 											if (window.confirm("Did you lend a hand?")) {
@@ -142,18 +142,16 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
-								<p>Comments: </p>
-								: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
 								<div className="card-buttons">
 
-									<Button color="secondary"
+									<Button outline color="info"
 										type="button" className="edit-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
 									>Edit Comment
 									</Button>
-									<Button color="success"
+									<Button outline color="success"
 										type="button" className="add-comment"
 										onClick={() => {
 											this.commentToggle();
@@ -161,6 +159,8 @@ class IssueCard extends Component {
 									>Add Comment
 									</Button>
 								</div>
+
+								 {this.state.comments.map(creatorComment => <p>{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
 							</>
 							: null
 						}
@@ -168,19 +168,19 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
 
 							<>
-								<p>Comments: </p>
-								: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+
+								{this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
 								<div className="card-buttons">
 
-									<Button color="secondary"
-										type="button" className="complete-issue"
+									<Button outline color="info"
+										type="button" className="edit-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
 									>Edit Comments!
 									</Button>
-									<Button color="success"
-										type="button" className="complete-issue"
+									<Button outline color="success"
+										type="button" className="add-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
@@ -196,7 +196,7 @@ class IssueCard extends Component {
 							<>
 								<div className="card-buttons">
 									<Button
-										color="danger"
+										outline color="danger"
 										type="button"
 										className="delete-issue"
 										onClick={() =>
@@ -207,7 +207,7 @@ class IssueCard extends Component {
 								</Button>
 
 									<Button
-										color="secondary"
+										outline color="info"
 										type="button"
 										className="edit-issue"
 										onClick={() => {
