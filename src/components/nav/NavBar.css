@@ -1,9 +1,13 @@
 .welcome-sign {
-  margin-left: 15px;
   color: #444444;
   font-size: 22px;
 }
 
+
+.hope-logo {
+  max-width: 2.5%;
+  margin-left: 50px;
+}
 
 ul {
     font-size: 20px;

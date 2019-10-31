@@ -25,6 +25,7 @@ class NavigationBar extends Component {
 
                 {(this.props.user) ?
                     <>
+                        {/* <img alt="logo" src={require("../../images/hope_logo.png")} className="hope-logo"/> */}
                         <h4 className="welcome-sign">Welcome, {this.activeUserName}!</h4>
                         <ul className="nav nav-pills nav-fill">
 
