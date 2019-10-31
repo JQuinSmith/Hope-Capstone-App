@@ -7,11 +7,12 @@
 
 .issues-container {
     margin-left: 25px;
+    margin-top: 35px;
 }
 
 .issue-card {
     margin: 20px 0px 0px 0px;
-    max-width: 51%;
+    max-width: 52%;
     display: flex;
     flex-wrap: nowrap;
     border-top: .75px solid rgba(142, 142, 142, 0.25);
@@ -23,14 +24,15 @@
     display: flex;
     justify-content: flex-end;
     margin-left: 195px;
-    max-width: 285px;
+    max-width: 300px;
     max-height: 200px;
+    overflow: hidden;
 
 }
 
 .cloudinaryImg {
-    overflow: hidden;
     border-radius: 3px;
+    max-width: 315px;
 }
 
 
@@ -65,7 +67,7 @@
 }
 
 .accept-issue {
-    margin-left: 20px;
+    margin-left: 0px;
     margin-top: 3px;
     padding: 6px 12px;
 }
@@ -116,4 +118,10 @@ textarea {
 
 .comment {
     max-width: 32%;
+}
+
+.add {
+    max-height: 38px;
+    font-size: 16px !important;
+    margin: 0px 0px 0px 0px !important
 }
