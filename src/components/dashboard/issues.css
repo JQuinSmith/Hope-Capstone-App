@@ -113,3 +113,7 @@ textarea {
 .preview-img {
     max-width: 100%;
 }
+
+.comment {
+    max-width: 32%;
+}

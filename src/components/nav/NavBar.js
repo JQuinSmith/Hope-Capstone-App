@@ -28,19 +28,19 @@ class NavigationBar extends Component {
                         <h4 className="welcome-sign">Welcome, {this.activeUserName}!</h4>
                         <ul className="nav nav-pills nav-fill">
 
-                            <li><Link className="nav-link" to="/">Home</Link></li>
+                            <li><Link className="nav-link-home" to="/">Home</Link></li>
 
-                            <li><Link className="nav-link" to="/myissues">My Issues</Link></li>
+                            <li><Link className="nav-link-yellow" to="/myissues">My Issues</Link></li>
 
-                            <li><Link className="nav-link" to="/acceptedissues">My Accepted Issues</Link></li>
+                            <li><Link className="nav-link-blue" to="/acceptedissues">My Accepted Issues</Link></li>
 
-                            <li><Link className="nav-link" to="/resolvedissues">My Resolved Issues</Link></li>
+                            <li><Link className="nav-link-green" to="/resolvedissues">My Resolved Issues</Link></li>
 
-                            <li><Link className="nav-link" to="/login" onClick={this.logOut}>Logout</Link></li>
-                </ul>
-                        </>
-                        : null
-                    }
+                            <li><Link className="nav-link-logout" to="/login" onClick={this.logOut}>Logout</Link></li>
+                        </ul>
+                    </>
+                    : null
+                }
             </Navbar>
         )
     }

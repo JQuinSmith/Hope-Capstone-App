@@ -19,12 +19,13 @@ class IssueCard extends Component {
 	};
 
 	commentStateUpdate = () => {
-		 APIManager.getAllComments("comments")
-            .then(responseComments =>
-				{let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
-                return comments}
-            )
-			.then((filteredArray) => this.setState({comments:filteredArray}))
+		APIManager.getAllComments("comments")
+			.then(responseComments => {
+				let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
+				return comments
+			}
+			)
+			.then((filteredArray) => this.setState({ comments: filteredArray }))
 
 
 
@@ -66,16 +67,16 @@ class IssueCard extends Component {
 	}
 
 	componentDidMount() {
-		APIManager.getComment("comments", this.props.issueId)
+		APIManager.getAllComments("comments")
 			.then(
-				comment => {
-					this.setState({
-						comments: comment,
-						loadingStatus: false
-					})
+				responseComments => {
+					let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
+					return comments
 				}
 			)
+			.then((filteredArray) => this.setState({ comments: filteredArray }))
 	}
+
 
 	render() {
 		const closeBtn = (
@@ -97,13 +98,14 @@ class IssueCard extends Component {
 								<p>
 									{this.props.issue.issueDescription}
 								</p>
-								<br></br>
+
 								<p>Deadline: {this.props.issue.issueDeadline}</p>
 							</div>
-
-							<div className="cloudinaryContainer">
-								<img alt="cloudinaryImg" src={this.props.issue.imageURL} className="cloudinaryImg" />
-							</div>
+							{this.props.issue.imageURL !== "" ?
+								<div className="cloudinaryContainer">
+									<img alt="cloudinaryImg" src={this.props.issue.imageURL} className="cloudinaryImg" />
+								</div>
+								: null}
 						</div>
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
@@ -154,6 +156,7 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
+								{this.state.comments.map(creatorComment => <p className="comment">{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
 								<div className="card-buttons">
 
 									<Button outline color="info"
@@ -172,7 +175,6 @@ class IssueCard extends Component {
 									</Button>
 								</div>
 
-								 {this.state.comments.map(creatorComment => <p>{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
 							</>
 							: null
 						}
@@ -181,7 +183,7 @@ class IssueCard extends Component {
 
 							<>
 
-								{this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+								{this.state.comments.map(creatorComment => <p className="comment">{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
 								<div className="card-buttons">
 
 									<Button outline color="info"
@@ -189,14 +191,14 @@ class IssueCard extends Component {
 										onClick={() => {
 											this.commentToggle();
 										}}
-									>Edit Comments!
+									>Edit Comments
 									</Button>
 									<Button outline color="success"
 										type="button" className="add-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
-									>Add Comments!
+									>Add Comments
 									</Button>
 								</div>
 							</>
@@ -215,7 +217,7 @@ class IssueCard extends Component {
 											this.handleDelete(this.props.issue.id)
 										}
 									>
-										Delete
+										Remove
 								</Button>
 
 									<Button
@@ -269,7 +271,7 @@ class IssueCard extends Component {
 							</ModalHeader>
 						<ModalBody>
 							<CompleteIssueForm
-							key={this.props.issue.id}
+								key={this.props.issue.id}
 								{...this.props}
 								commentStateUpdate={this.commentStateUpdate}
 								issueId={this.props.issue.id}
