@@ -7,28 +7,32 @@
 
 .issues-container {
     margin-left: 25px;
+    margin-top: 35px;
 }
 
 .issue-card {
     margin: 20px 0px 0px 0px;
-    max-width: 50%;
+    max-width: 52%;
     display: flex;
     flex-wrap: nowrap;
-    border: .75px solid rgba(79, 79, 79, 0.25);
-    color: #444444
+    border-top: .75px solid rgba(142, 142, 142, 0.25);
+    /* border-bottom: .75px solid rgba(142, 142, 142, 0.25); */
+    color: #444444;
 }
 
 .cloudinaryContainer{
     display: flex;
     justify-content: flex-end;
     margin-left: 195px;
+    max-width: 300px;
+    max-height: 200px;
+    overflow: hidden;
 
 }
 
 .cloudinaryImg {
-    max-width: 285px;
-    max-height: 200px;
     border-radius: 3px;
+    max-width: 315px;
 }
 
 
@@ -45,21 +49,36 @@
 .issue-card-body {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 225px;
+}
+
+.addIssue {
+    margin-top: 50px;
 }
 
 .delete-issue {
-    margin: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    max-height: 38px;
 }
 
 .edit-issue {
-    margin: 5px;
+    margin: 5px 5px;
 }
 
 .accept-issue {
-    margin-left: 20px;
+    margin-left: 0px;
     margin-top: 3px;
     padding: 6px 12px;
+}
+
+.cancel-issue {
+    margin-top: 5px;
+}
+
+.complete-issue {
+    margin-top: 5px;
+    margin-right: 5px;
 }
 
 .issueAccept {
@@ -71,12 +90,17 @@
 
 .card-buttons {
     display: flex;
-    justify-content: right;
-    float: right;
+    float: left;
     margin-bottom: 5px;
+
+}
+
+.add-comment {
+    margin-top: 5px;
 }
 
 .edit-comment {
+    margin-top: 5px;
     margin-right: 5px;
 }
 
@@ -86,4 +110,18 @@
 
 textarea {
     resize: none !important;
+}
+
+.preview-img {
+    max-width: 100%;
+}
+
+.comment {
+    max-width: 32%;
+}
+
+.add {
+    max-height: 38px;
+    font-size: 16px !important;
+    margin: 0px 0px 0px 0px !important
 }

@@ -7,9 +7,8 @@ class ResolvedIssuesView extends Component {
 render() {
     return (
         <div>
-
-            <h1 className="header">This is the Resolved Issues View</h1>
-            <ResolvedIssuesList 
+            <ResolvedIssuesList
+            key={this.props.user.id}
             user={this.props.user}/>
 
         </div>

@@ -5,9 +5,7 @@ class AcceptedIssuesView extends Component {
     render() {
         return (
             <div>
-
-                <h1 className="header">This is the Accepted Issues View</h1>
-                <AcceptedIssuesList 
+                <AcceptedIssuesList
                 user={this.props.user}/>
 
             </div>

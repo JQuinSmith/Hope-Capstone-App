@@ -49,9 +49,6 @@ class AcceptedIssuesList extends Component {
         return (
             <>
                 <div className="issues-container">
-                    <div className="issues-intro">
-                        <h2>Accepted Issues List</h2>
-                    </div>
                     <div className="issue-container-cards">
                         {this.state.issues.map(issue => (
                             <IssueCard

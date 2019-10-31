@@ -9,7 +9,8 @@ class CompleteIssueForm extends Component {
         commentInput: "",
         loadingStatus: true,
         modal: false,
-        activeUser: parseInt(sessionStorage.getItem("userId"))
+        activeUser: parseInt(sessionStorage.getItem("userId")),
+        activeUserName: sessionStorage.getItem("name")
     };
 
     handleFieldChange = evt => {
@@ -20,26 +21,22 @@ class CompleteIssueForm extends Component {
 
     addComment = evt => {
         evt.preventDefault();
-        // this.props.toggle();
+        this.props.toggle();
         // this.setState({ loadingStatus: true });
         const addedComment = {
             userId: this.state.activeUser,
+            activeUserName: this.state.activeUserName,
             issueId: this.props.issueId,
             comment: this.state.commentInput
         };
         APIManager.post("comments", addedComment)
-            .then((responseComments => {
-                this.setState({
-                    comment: responseComments
-                });
-            }))
-            .then(() => console.log("this is state once set", this.state.comment))
+        .then(() => this.props.commentStateUpdate())
+
     };
 
 
     componentDidMount() {
-        console.log("this is component did mount",this.state.comment)
-        return APIManager.get("issues", this.props.issueId)
+        APIManager.get("issues", this.props.issueId)
             .then(
                 issue => {
                     this.setState({
@@ -50,18 +47,16 @@ class CompleteIssueForm extends Component {
                     });
                     APIManager.getComment("comments", this.props.issueId)
                         .then(
-                            comment => {
+                            comment =>
                                 this.setState({
                                     comment: comment,
                                     loadingStatus: false
                                 })
-                            }
                         )
                 })
     };
 
     render() {
-        console.log("this is render",this.state.comment)
         return (
             <>
                 <ModalBody>
@@ -79,7 +74,7 @@ class CompleteIssueForm extends Component {
                             <p>{this.state.issueDeadline}</p>
 
                             <h5 htmlFor="comment">Comments</h5>
-                           { this.state.comment.map( oneComment => <p>{oneComment.comment}</p>)}
+                            {this.state.comment.map(oneComment => <p>{oneComment.comment}</p>)}
 
                         </div>
                         <div className="alignRight">

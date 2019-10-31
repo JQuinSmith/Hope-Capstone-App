@@ -18,6 +18,19 @@ class IssueCard extends Component {
 		commentModal: false
 	};
 
+	commentStateUpdate = () => {
+		APIManager.getAllComments("comments")
+			.then(responseComments => {
+				let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
+				return comments
+			}
+			)
+			.then((filteredArray) => this.setState({ comments: filteredArray }))
+
+
+
+	}
+
 	toggle = () => {
 		this.setState(prevState => ({
 			modal: !prevState.modal
@@ -54,16 +67,16 @@ class IssueCard extends Component {
 	}
 
 	componentDidMount() {
-		APIManager.getComment("comments", this.props.issueId)
+		APIManager.getAllComments("comments")
 			.then(
-				comment => {
-					this.setState({
-						comments: comment,
-						loadingStatus: false
-					})
+				responseComments => {
+					let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
+					return comments
 				}
 			)
+			.then((filteredArray) => this.setState({ comments: filteredArray }))
 	}
+
 
 	render() {
 		const closeBtn = (
@@ -78,25 +91,26 @@ class IssueCard extends Component {
 						<div className="issue-card-details">
 							<div className="issue-card-body">
 								<span className="card-issueTitle">
-									<h4>
+									<h5>
 										{this.props.issue.issueName}
-									</h4>
+									</h5>
 								</span>
 								<p>
 									{this.props.issue.issueDescription}
 								</p>
-								<br></br>
+
 								<p>Deadline: {this.props.issue.issueDeadline}</p>
 							</div>
-
-							<div className="cloudinaryContainer">
-								<img src={this.props.issue.imageURL} className="cloudinaryImg" />
-							</div>
+							{this.props.issue.imageURL !== "" ?
+								<div className="cloudinaryContainer">
+									<img alt="cloudinaryImg" src={this.props.issue.imageURL} className="cloudinaryImg" />
+								</div>
+								: null}
 						</div>
 						{this.props.activeUserId !== this.props.issueUserId && this.props.activeUserId !== this.props.helpingUserId ?
 							<>
 								<div className="card-buttons">
-									<Button color="primary"
+									<Button outline color="primary"
 										type="button" className="accept-issue"
 										onClick={() => {
 											if (window.confirm("Lend this person a hand?")) {
@@ -115,7 +129,7 @@ class IssueCard extends Component {
 							<>
 								<div className="card-buttons">
 
-									<Button color="danger"
+									<Button outline color="danger"
 										type="button" className="cancel-issue"
 										onClick={() => {
 											if (window.confirm("Change your mind?")) {
@@ -125,7 +139,7 @@ class IssueCard extends Component {
 										}}
 									>Drop Issue
 									</Button>
-									<Button color="success"
+									<Button outline color="success"
 										type="button" className="complete-issue"
 										onClick={() => {
 											if (window.confirm("Did you lend a hand?")) {
@@ -142,18 +156,17 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
-								<p>Comments: </p>
-								: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+								{this.state.comments.map(creatorComment => <p className="comment">{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
 								<div className="card-buttons">
 
-									<Button color="secondary"
+									<Button outline color="info"
 										type="button" className="edit-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
 									>Edit Comment
 									</Button>
-									<Button color="success"
+									<Button outline color="success"
 										type="button" className="add-comment"
 										onClick={() => {
 											this.commentToggle();
@@ -161,6 +174,7 @@ class IssueCard extends Component {
 									>Add Comment
 									</Button>
 								</div>
+
 							</>
 							: null
 						}
@@ -168,23 +182,23 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
 
 							<>
-								<p>Comments: </p>
-								: {this.state.comments.map(oneComment => <p>{oneComment.comment}</p>)}
+
+								{this.state.comments.map(creatorComment => <p className="comment">{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
 								<div className="card-buttons">
 
-									<Button color="secondary"
-										type="button" className="complete-issue"
+									<Button outline color="info"
+										type="button" className="edit-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
-									>Edit Comments!
+									>Edit Comments
 									</Button>
-									<Button color="success"
-										type="button" className="complete-issue"
+									<Button outline color="success"
+										type="button" className="add-comment"
 										onClick={() => {
 											this.commentToggle();
 										}}
-									>Add Comments!
+									>Add Comments
 									</Button>
 								</div>
 							</>
@@ -196,18 +210,18 @@ class IssueCard extends Component {
 							<>
 								<div className="card-buttons">
 									<Button
-										color="danger"
+										outline color="danger"
 										type="button"
 										className="delete-issue"
 										onClick={() =>
 											this.handleDelete(this.props.issue.id)
 										}
 									>
-										Delete
+										Remove
 								</Button>
 
 									<Button
-										color="secondary"
+										outline color="info"
 										type="button"
 										className="edit-issue"
 										onClick={() => {
@@ -257,7 +271,9 @@ class IssueCard extends Component {
 							</ModalHeader>
 						<ModalBody>
 							<CompleteIssueForm
+								key={this.props.issue.id}
 								{...this.props}
+								commentStateUpdate={this.commentStateUpdate}
 								issueId={this.props.issue.id}
 								getData={this.props.getData}
 								toggle={this.commentToggle} />
