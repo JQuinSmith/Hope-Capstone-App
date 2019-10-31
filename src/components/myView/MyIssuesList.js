@@ -30,7 +30,7 @@ class MyIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues").then(issues => {
+    getMyIssuesData = () => APIManager.getAllMy("issues", this.activeUserId).then(issues => {
         this.setState({
             issues: issues
         });
@@ -67,7 +67,7 @@ class MyIssuesList extends Component {
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}
                                 {...this.props}
-                                getData={this.getData}
+                                getMyIssuesData={this.getMyIssuesData}
                             />
                         ))}
                     </div>

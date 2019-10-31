@@ -20,7 +20,7 @@ export default {
     },
 
     getAllMyAccepted(resource, helpingUserId) {
-      return fetch(`${remoteURL}/${resource}?issueComplete=false&helpingUserId=/=${helpingUserId}`).then(result => result.json())
+      return fetch(`${remoteURL}/${resource}?issueComplete=false&helpingUserId=${helpingUserId}`).then(result => result.json())
     },
 
     getAllMyResolved(resource, userId) {

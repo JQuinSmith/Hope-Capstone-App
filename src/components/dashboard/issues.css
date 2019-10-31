@@ -16,7 +16,6 @@
     display: flex;
     flex-wrap: nowrap;
     border-top: .75px solid rgba(142, 142, 142, 0.25);
-    /* border-bottom: .75px solid rgba(142, 142, 142, 0.25); */
     color: #444444;
 }
 

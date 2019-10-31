@@ -1,16 +1,19 @@
 .welcome-sign {
   color: #444444;
   font-size: 22px;
+  margin-right: 600px;
 }
 
 
 .hope-logo {
   max-width: 2.5%;
-  margin-left: 50px;
+  margin-left: 15px;
+  margin-bottom: 5px;
 }
 
 ul {
     font-size: 20px;
+    margin-right: 5px;
     color: #444444;
   }
 
@@ -34,7 +37,7 @@ nav {
   text-decoration: none !important;
   transition: .2s;
   font-size: 18px !important;
-  padding-bottom: 13px;
+  padding-bottom: 27px;
 }
 
 .nav-link-yellow {
@@ -42,7 +45,7 @@ nav {
   text-decoration: none !important;
   transition: .2s;
   font-size: 18px !important;
-  padding-bottom: 13px;
+  padding-bottom: 27px;
 
 }
 
@@ -51,7 +54,7 @@ nav {
   text-decoration: none !important;
   transition: .2s;
   font-size: 18px !important;
-  padding-bottom: 13px;
+  padding-bottom: 27px;
 }
 
 .nav-link-green {
@@ -59,7 +62,7 @@ nav {
   text-decoration: none !important;
   transition: .1s;
   font-size: 18px !important;
-  padding-bottom: 13px;
+  padding-bottom: 27px;
 }
 
 .nav-link-logout {
@@ -67,7 +70,7 @@ nav {
   text-decoration: none !important;
   transition: .2s;
   font-size: 18px !important;
-  padding-bottom: 13px;
+  padding-bottom: 27px;
 }
 
 .nav-link-home:hover {

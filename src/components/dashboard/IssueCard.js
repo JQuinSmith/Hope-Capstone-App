@@ -246,13 +246,13 @@ class IssueCard extends Component {
 						<ModalHeader
 							toggle={this.toggle}
 							close={closeBtn}>
-							Edit issue
+							Edit Issue
 							</ModalHeader>
 						<ModalBody>
 							<EditIssueForm
 								{...this.props}
 								issueId={this.props.issue.id}
-								getData={this.props.getData}
+                                getData={this.props.getMyIssuesData}
 								toggle={this.toggle} />
 						</ModalBody>
 
