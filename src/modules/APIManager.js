@@ -64,6 +64,16 @@ export default {
     }).then(data => data.json());
   },
 
+  editComment(resource, userId, editedComment) {
+    return fetch(`${remoteURL}/${resource}/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({comment: editedComment})
+    }).then(data => data.json());
+  },
+
   complete(resource, userId, issueComplete) {
     return fetch(`${remoteURL}/${resource}/${userId}`, {
       method: "PATCH",

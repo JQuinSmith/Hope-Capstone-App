@@ -20,9 +20,9 @@ class MyIssuesList extends Component {
         }));
     };
 
-    deleteissue = id => {
+    deleteMyIssue = id => {
         APIManager.delete("issues", id).then(() => {
-            APIManager.getAll("issues").then(newissues => {
+            APIManager.getAllMy("issues", this.activeUserId).then(newissues => {
                 this.setState({
                     issues: newissues
                 });
@@ -62,7 +62,7 @@ class MyIssuesList extends Component {
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
-                                deleteIssue={this.deleteIssue}
+                                deleteMyIssue={this.deleteMyIssue}
                                 user={this.props.user}
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}

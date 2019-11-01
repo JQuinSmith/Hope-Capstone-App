@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
 import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
+import EditCompleteIssueForm from "../resolvedView/EditCompleteIssueForm"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 import "../dashboard/issues.css"
 
@@ -15,8 +16,12 @@ class IssueCard extends Component {
 		issueId: "",
 		comments: [],
 		modal: false,
-		commentModal: false
+		commentModal: false,
+		editCommentModal: false
 	};
+
+	activeUserId = parseInt(sessionStorage.getItem("userId"))
+	activeUsername = (sessionStorage.getItem("name"))
 
 	commentStateUpdate = () => {
 		APIManager.getAllComments("comments")
@@ -26,9 +31,6 @@ class IssueCard extends Component {
 			}
 			)
 			.then((filteredArray) => this.setState({ comments: filteredArray }))
-
-
-
 	}
 
 	toggle = () => {
@@ -43,8 +45,11 @@ class IssueCard extends Component {
 		}))
 	}
 
-	activeUserId = parseInt(sessionStorage.getItem("userId"))
-	activeUsername = (sessionStorage.getItem("name"))
+	editCommentToggle = () => {
+		this.setState(prevState => ({
+			editCommentModal: !prevState.editCommentModal
+		}))
+	}
 
 	handleDelete = id => {
 		APIManager.delete("issues", id)
@@ -162,7 +167,7 @@ class IssueCard extends Component {
 									<Button outline color="info"
 										type="button" className="edit-comment"
 										onClick={() => {
-											this.commentToggle();
+											this.editCommentToggle();
 										}}
 									>Edit Comment
 									</Button>
@@ -189,7 +194,7 @@ class IssueCard extends Component {
 									<Button outline color="info"
 										type="button" className="edit-comment"
 										onClick={() => {
-											this.commentToggle();
+											this.editCommentToggle();
 										}}
 									>Edit Comments
 									</Button>
@@ -214,7 +219,7 @@ class IssueCard extends Component {
 										type="button"
 										className="delete-issue"
 										onClick={() =>
-											this.handleDelete(this.props.issue.id)
+											this.props.deleteMyIssue(this.props.issue.id)
 										}
 									>
 										Remove
@@ -252,7 +257,7 @@ class IssueCard extends Component {
 							<EditIssueForm
 								{...this.props}
 								issueId={this.props.issue.id}
-                                getData={this.props.getMyIssuesData}
+								getData={this.props.getMyIssuesData}
 								toggle={this.toggle} />
 						</ModalBody>
 
@@ -277,6 +282,29 @@ class IssueCard extends Component {
 								issueId={this.props.issue.id}
 								getData={this.props.getData}
 								toggle={this.commentToggle} />
+						</ModalBody>
+
+
+					</Modal>
+
+					<Modal
+						isOpen={this.state.editCommentModal}
+						toggle={this.editCommentToggle}
+						className={this.props.className}
+					>
+						<ModalHeader
+							toggle={this.editCommentToggle}
+							close={closeBtn}>
+							Issue Resolved - Edit Your Comment!
+							</ModalHeader>
+						<ModalBody>
+							<EditCompleteIssueForm
+								key={this.props.issue.id}
+								{...this.props}
+								commentStateUpdate={this.commentStateUpdate}
+								issueId={this.props.issue.id}
+								getData={this.props.getData}
+								toggle={this.editCommentToggle} />
 						</ModalBody>
 
 

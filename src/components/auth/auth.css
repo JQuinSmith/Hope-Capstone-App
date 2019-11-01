@@ -8,21 +8,27 @@
     .registrationDiv {
         display: flex;
         margin-top: 1em;
-        justify-content: space-around;
+        justify-content: center;
         flex-direction: row;
         height: 80%;
         width: 100%;
         margin: 2em;
     }
-     .registrationButton, .loginButton  {
-        justify-content: space-between;
+
+    .hope-logo-login {
+        width: 20%;
+        margin-left: 25px;
+
+    }
+
+    .registrationButton, .loginButton  {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px !important;
         align-items: center;
         height: 70px;
         width: 190px;
         margin: 1em;
-        margin-top: 200px;
+        margin-top: 260px;
         margin-left: 60px;
         background-color: white;
 

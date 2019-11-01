@@ -21,7 +21,7 @@ class IssueList extends Component {
         }));
     };
 
-    deleteissue = id => {
+    deleteIssue = id => {
         APIManager.delete("issues", id).then(() => {
             APIManager.getAll("issues").then(newissues => {
                 this.setState({

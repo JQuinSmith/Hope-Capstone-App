@@ -66,6 +66,7 @@ class Login extends Component {
         const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
         return (
             <div>
+
                 <div className="registrationDiv">
                     <Button
                         className="loginButton"
@@ -129,7 +130,8 @@ class Login extends Component {
                         </ModalFooter>
                     </Modal>
 
-                    <div><img alt="logo" src={require("../../images/hope_logo.png")} className="hope-logo" /></div>
+                    <img alt="logo" src={require("../../images/hope_logo.png")} className="hope-logo-login" />
+
 
                     <Register triggerRender={this.props.triggerRender} {...this.props} />
 
