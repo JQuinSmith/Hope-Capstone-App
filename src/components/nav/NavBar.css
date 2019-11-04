@@ -1,19 +1,20 @@
 .welcome-sign {
   color: #444444;
   font-size: 22px;
-  margin-right: 600px;
+  margin-right: 550px;
+  max-width: 25%;
 }
 
 
 .hope-logo {
   max-width: 2.5%;
-  margin-left: 15px;
+  margin-left: 25px;
   margin-bottom: 5px;
 }
 
 ul {
     font-size: 20px;
-    margin-right: 5px;
+    margin-left: 10px;
     color: #444444;
   }
 

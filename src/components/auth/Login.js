@@ -60,15 +60,13 @@ class Login extends Component {
             })
     }
 
-
-    //Login modal code goes here. 👇
     render() {
         const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
         return (
             <div>
 
                 <div className="registrationDiv">
-                    <Button
+                    <Button outline color="secondary"
                         className="loginButton"
                         onClick={this.toggle}
                     >
@@ -87,32 +85,37 @@ class Login extends Component {
                             <form onSubmit={this.handleLogin}>
                                 <fieldset>
                                     <div className="formgrid">
-                                        <label htmlFor="inputEmail">Name</label><br></br>
+                                        <label htmlFor="inputEmail">Name</label>
                                         <input onChange={this.handleFieldChange} type="text"
-                                            id="name"
+                                            id="name" className="name"
                                             placeholder="Name"
                                             required="" autoFocus="" /><br></br>
+
+                                        <br></br>
                                         <label htmlFor="inputEmail">
                                             Email address
 									</label>
-                                        <br></br>
+
                                         <input
                                             onChange={this.handleFieldChange}
                                             type="email"
                                             id="email"
+                                            className="email"
                                             placeholder="Email address"
                                             required=""
                                             autoFocus=""
                                         />
+
+                                        <br></br>
                                         <br></br>
                                         <label htmlFor="inputPassword">
                                             Password
 									</label>
-                                        <br></br>
                                         <input
                                             onChange={this.handleFieldChange}
                                             type="password"
                                             id="password"
+                                            className="password"
                                             placeholder="Password"
                                             required=""
                                         />
