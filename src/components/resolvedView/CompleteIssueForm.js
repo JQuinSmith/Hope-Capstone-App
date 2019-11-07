@@ -45,7 +45,7 @@ class CompleteIssueForm extends Component {
                         issueDeadline: issue.issueDeadline,
                         loadingStatus: false
                     });
-                    APIManager.getComment("comments", this.props.issueId)
+                    APIManager.getComment(this.props.issueId)
                         .then(
                             comment =>
                                 this.setState({
@@ -56,7 +56,7 @@ class CompleteIssueForm extends Component {
                 })
     };
 
-    render() {
+    render() {console.log(this.props.issueId)
         return (
             <>
                 <ModalBody>

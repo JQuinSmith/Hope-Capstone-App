@@ -21,75 +21,52 @@
   ],
   "issues": [
     {
-      "userId": 2,
-      "issueName": "It's cloudy",
-      "issueDescription": "What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      "issueDeadline": "2019-10-29",
-      "issueComplete": true,
-      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1572359420/qynrjkoyqp0nzn1orchx.jpg",
-      "uploadedFile": {
-        "path": "Spiderverse.jpg"
-      },
-      "helpingUserId": 1,
+      "userId": 1,
+      "userName": "Quin",
+      "issueName": "Now with a name",
+      "issueDescription": "wowee",
+      "issueDeadline": "2019-11-09",
+      "issueComplete": false,
+      "imageURL": "",
+      "uploadedFile": null,
+      "helpingUserId": null,
       "latitudeValue": null,
       "longitudeValue": null,
       "locationName": null,
-      "id": 1
-    },
-    {
-      "userId": 2,
-      "issueName": "Show me a new issue",
-      "issueDescription": "Trying to understand why accepted issues isn't working",
-      "issueDeadline": "2019-10-31",
-      "issueComplete": true,
-      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1572550019/kimtsyrvz4lqmfpgtqqw.jpg",
-      "uploadedFile": {
-        "path": "bokeh.jpg"
-      },
-      "helpingUserId": 1,
-      "latitudeValue": null,
-      "longitudeValue": null,
-      "locationName": null,
-      "id": 7
+      "id": 10
     },
     {
       "userId": 3,
-      "issueName": "Demo",
-      "issueDescription": "Here's some stuff I'm typing to fill up the content section of the card wow.",
-      "issueDeadline": "2019-11-02",
+      "userName": "Dummy",
+      "issueName": "olfkjqo",
+      "issueDescription": "soifjkso",
+      "issueDeadline": "2019-11-21",
       "issueComplete": true,
-      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1572620752/nrbxypxpgpbhxwdskjrr.jpg",
+      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573088480/guejm8goyp5nvrdyrtgz.jpg",
       "uploadedFile": {
-        "path": "spooky.jpg"
+        "path": "Downtown.jpg"
       },
       "helpingUserId": 1,
       "latitudeValue": null,
       "longitudeValue": null,
       "locationName": null,
-      "id": 9
+      "id": 11
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "activeUserName": "Quin",
-      "comment": "Please edit.",
-      "issueId": 1,
-      "userId": 1
-    },
-    {
       "userId": 1,
       "activeUserName": "Quin",
-      "issueId": 9,
-      "comment": "Gave you some stuff for your demo. Godspeed fam.",
-      "id": 2
+      "comment": "Sorry excuse me.",
+      "issueId": 11,
+      "id": 1
     },
     {
       "userId": 3,
       "activeUserName": "Dummy",
-      "issueId": 9,
-      "comment": "Thanks so much bro.",
-      "id": 3
+      "issueId": 11,
+      "comment": "Hi I'm dummy",
+      "id": 2
     }
   ]
 }

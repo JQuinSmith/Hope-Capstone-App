@@ -42,7 +42,7 @@ class MyIssuesList extends Component {
             this.setState({
                 issues: issues
             });
-            APIManager.getComment("comments", this.activeUserId)
+            APIManager.getAllMy("comments", this.activeUserId)
                 .then(
                     comment => {
                         this.setState({

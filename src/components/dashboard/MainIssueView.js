@@ -6,12 +6,17 @@ class Dashboard extends Component {
 
 render() {
     return (
+        <>
         <div>
 
             <IssueList
             user={this.props.user}/>
 
         </div>
+        <div>
+            {/* <MapLayer/> */}
+        </div>
+        </>
     );
 }
 }

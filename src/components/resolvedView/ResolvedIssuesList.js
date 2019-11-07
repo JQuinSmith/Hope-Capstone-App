@@ -43,15 +43,7 @@ class ResolvedIssuesList extends Component {
                 this.setState({
                     issues: issues
                 });
-                APIManager.getComment("comments", this.props.issueId)
-                    .then(
-                        comment => {
-                            this.setState({
-                                comments: comment,
-                                loadingStatus: false
-                            })
-                        }
-                    )
+                APIManager.getComment(this.props.issueId)
             });
     }
 

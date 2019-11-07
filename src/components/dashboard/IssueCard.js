@@ -89,6 +89,16 @@ class IssueCard extends Component {
 				&times;
 			</button>
 		);
+		const commentCloseBtn = (
+			<button className="close" onClick={this.commentToggle}>
+				&times;
+			</button>
+		);
+		const editCloseBtn = (
+			<button className="close" onClick={this.editCommentToggle}>
+				&times;
+			</button>
+		);
 		return (
 			<>
 				<div className="issue-card">
@@ -96,6 +106,9 @@ class IssueCard extends Component {
 						<div className="issue-card-details">
 							<div className="issue-card-body">
 								<span className="card-issueTitle">
+									<p className="created-by">
+										Created By: {this.props.issue.userName}
+									</p>
 									<h5>
 										{this.props.issue.issueName}
 									</h5>
@@ -219,13 +232,13 @@ class IssueCard extends Component {
 										type="button"
 										className="delete-issue"
 										onClick={() =>
-											this.props.deleteMyIssue(this.props.issue.id)
+											this.props.deleteIssue(this.props.issue.id)
 										}
 									>
 										Remove
 								</Button>
 
-									<Button
+									{/* <Button
 										outline color="info"
 										type="button"
 										className="edit-issue"
@@ -234,7 +247,7 @@ class IssueCard extends Component {
 										}}
 									>
 										Edit
-						</Button>
+						</Button> */}
 								</div>
 							</>
 							: null
@@ -257,7 +270,8 @@ class IssueCard extends Component {
 							<EditIssueForm
 								{...this.props}
 								issueId={this.props.issue.id}
-								getData={this.props.getMyIssuesData}
+								getMyIssuesData={this.props.getMyIssuesData}
+								getData={this.props.getData}
 								toggle={this.toggle} />
 						</ModalBody>
 
@@ -271,11 +285,12 @@ class IssueCard extends Component {
 					>
 						<ModalHeader
 							toggle={this.commentToggle}
-							close={closeBtn}>
+							close={commentCloseBtn}>
 							Issue Resolved - Leave a Comment!
 							</ModalHeader>
 						<ModalBody>
-							<CompleteIssueForm
+
+						<CompleteIssueForm
 								key={this.props.issue.id}
 								{...this.props}
 								commentStateUpdate={this.commentStateUpdate}
@@ -294,17 +309,19 @@ class IssueCard extends Component {
 					>
 						<ModalHeader
 							toggle={this.editCommentToggle}
-							close={closeBtn}>
+							close={editCloseBtn}>
 							Issue Resolved - Edit Your Comment!
 							</ModalHeader>
 						<ModalBody>
-							<EditCompleteIssueForm
+
+                            <EditCompleteIssueForm
 								key={this.props.issue.id}
 								{...this.props}
 								commentStateUpdate={this.commentStateUpdate}
 								issueId={this.props.issue.id}
 								getData={this.props.getData}
 								toggle={this.editCommentToggle} />
+
 						</ModalBody>
 
 

@@ -4,8 +4,8 @@ export default {
     get(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
-    getComment(resource, id) {
-      return fetch(`${remoteURL}/${resource}?issueId=${id}`).then(result => result.json())
+    getComment(id) {
+      return fetch(`${remoteURL}/comments?issueId=${id}`).then(result => result.json())
     },
     getAll(resource){
       return fetch (`${remoteURL}/${resource}?issueComplete=false`).then(result => result.json())

@@ -7,7 +7,7 @@ class EditCompleteIssueForm extends Component {
 
     state = {
         comment: "",
-        issueId: "",
+        commentInput: "",
         activeUserName: "",
         activeUser: parseInt(sessionStorage.getItem("userId")),
         loadingStatus: true,
@@ -25,7 +25,7 @@ class EditCompleteIssueForm extends Component {
         this.props.toggle();
         // this.setState({ loadingStatus: true });
         const updatedComment = {
-            id: parseInt(this.props.issueId),
+            id: parseInt(this.props.comment.id),
             activeUserName: this.state.activeUserName,
             comment: this.state.commentInput,
             issueId: parseInt(this.props.issueId),
@@ -37,19 +37,20 @@ class EditCompleteIssueForm extends Component {
     };
 
     componentDidMount() {
-		return APIManager.get("comments", this.props.issueId)
+		return APIManager.getComment(this.props.issue.id)
 			.then(
 				comment => {
 					this.setState({
 						activeUserName: comment.activeUserName,
-						issueId: comment.issueId,
+						commentId: comment.id,
 						comment: comment.comment,
 						loadingStatus: false,
                     });
+                    console.log("componentDidMount here:", comment)
 				});
 	};
 
-    render() {console.log("this is state", this.state)
+    render() {
         return (
             <>
                 <ModalBody>
