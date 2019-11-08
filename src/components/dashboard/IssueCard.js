@@ -224,7 +224,7 @@ class IssueCard extends Component {
 						}
 
 
-						{(this.props.activeUserId === this.props.issueUserId) ?
+						{this.props.activeUserId === this.props.issueUserId ?
 							<>
 								<div className="card-buttons">
 									<Button
@@ -238,7 +238,7 @@ class IssueCard extends Component {
 										Remove
 								</Button>
 
-									{/* <Button
+									<Button
 										outline color="info"
 										type="button"
 										className="edit-issue"
@@ -247,7 +247,7 @@ class IssueCard extends Component {
 										}}
 									>
 										Edit
-						</Button> */}
+						</Button>
 								</div>
 							</>
 							: null

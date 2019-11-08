@@ -6,13 +6,24 @@
 }
 
 .issues-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-left: 25px;
-    margin-top: 35px;
+}
+
+.issue-container-cards {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+::-webkit-scrollbar {
+    background: transparent;
 }
 
 .issue-card {
     margin: 20px 0px 0px 0px;
-    max-width: 52%;
+    max-width: 100%;
     display: flex;
     flex-wrap: nowrap;
     border-top: .75px solid rgba(142, 142, 142, 0.25);
@@ -32,6 +43,7 @@
 .cloudinaryImg {
     border-radius: 3px;
     max-width: 315px;
+    object-fit: cover;
 }
 
 
@@ -53,6 +65,7 @@
 
 .addIssue {
     margin-top: 50px;
+    margin-left: 25px;
 }
 
 .delete-issue {
@@ -128,4 +141,8 @@ textarea {
 .created-by {
     font-size: 13px;
     margin: 0px;
+}
+
+.MyAppWrapper {
+    margin-top: 19px;
 }

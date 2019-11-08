@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import IssueCard from "../dashboard/IssueCard";
 import APIManager from "../../modules/APIManager";
 import AddIssueForm from "./AddIssueForm";
+import ReactMap from "../map/Map"
 import "./issues.css";
 
 class IssueList extends Component {
@@ -49,13 +50,10 @@ class IssueList extends Component {
     render() {
         return (
             <>
+                <AddIssueForm
+                    {...this.props}
+                    getData={this.getData} />
                 <div className="issues-container">
-                    <div className="issues-intro">
-
-                    </div>
-                    <AddIssueForm
-                        {...this.props}
-                        getData={this.getData} />
                     <div className="issue-container-cards">
                         {this.state.issues.map(issue => (
                             <IssueCard
@@ -71,6 +69,11 @@ class IssueList extends Component {
                                 getData={this.getData}
                             />
                         ))}
+                    </div>
+                    <div className="AppWrapper">
+                        <div className="Container">
+                            <ReactMap />
+                        </div>
                     </div>
                 </div>
             </>

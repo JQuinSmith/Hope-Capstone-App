@@ -1,6 +1,7 @@
 // Purpose of the file to display all issues
 import React, { Component } from "react";
 import IssueCard from "../dashboard/IssueCard";
+import ReactMap from "../map/Map"
 import APIManager from "../../modules/APIManager";
 
 class MyIssuesList extends Component {
@@ -71,10 +72,15 @@ class MyIssuesList extends Component {
                             />
                         ))}
                     </div>
+                    <div className="MyAppWrapper">
+                        <div className="Container">
+                            <ReactMap />
+                        </div>
+                    </div>
                 </div>
             </>
-        );
-    }
-}
-
-export default MyIssuesList;
+                );
+            }
+        }
+        
+        export default MyIssuesList;

@@ -21,19 +21,15 @@
   ],
   "issues": [
     {
-      "userId": 1,
+      "id": 10,
       "userName": "Quin",
       "issueName": "Now with a name",
       "issueDescription": "wowee",
-      "issueDeadline": "2019-11-09",
       "issueComplete": false,
-      "imageURL": "",
-      "uploadedFile": null,
-      "helpingUserId": null,
-      "latitudeValue": null,
-      "longitudeValue": null,
-      "locationName": null,
-      "id": 10
+      "issueDeadline": "2019-11-09",
+      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573165285/klggy1oggcqbdhzfbrq3.png",
+      "userId": 1,
+      "helpingUserId": 3
     },
     {
       "userId": 3,
@@ -51,15 +47,64 @@
       "longitudeValue": null,
       "locationName": null,
       "id": 11
+    },
+    {
+      "userId": 1,
+      "userName": "Quin",
+      "issueName": "Why don't you have an author name",
+      "issueDescription": "why tho",
+      "issueDeadline": "2019-11-08",
+      "issueComplete": false,
+      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573163438/dtmvr4h7sqxyhz9a92ym.jpg",
+      "uploadedFile": {
+        "path": "44839783_181330259488615_7905118879414812611_n.jpg"
+      },
+      "helpingUserId": null,
+      "latitudeValue": null,
+      "longitudeValue": null,
+      "locationName": null,
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "userName": "Quin",
+      "issueName": "One without an image",
+      "issueDescription": "oiahflasdfja",
+      "issueDeadline": "2019-11-08",
+      "issueComplete": false,
+      "imageURL": "",
+      "uploadedFile": null,
+      "helpingUserId": null,
+      "latitudeValue": null,
+      "longitudeValue": null,
+      "locationName": null,
+      "id": 13
+    },
+    {
+      "userId": 3,
+      "userName": "Dummy",
+      "issueName": "This man will not leave this house.",
+      "issueDescription": "Any excuse to draw him away for like 3 hours would be grand.",
+      "issueDeadline": "2019-11-09",
+      "issueComplete": false,
+      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573172665/kneja4oq2xt0fgigc718.jpg",
+      "uploadedFile": {
+        "path": "spooky.jpg"
+      },
+      "helpingUserId": null,
+      "latitudeValue": null,
+      "longitudeValue": null,
+      "locationName": null,
+      "id": 14
     }
   ],
   "comments": [
     {
-      "userId": 1,
+      "id": 1,
       "activeUserName": "Quin",
       "comment": "Sorry excuse me.",
       "issueId": 11,
-      "id": 1
+      "userId": 1
     },
     {
       "userId": 3,
