@@ -2,18 +2,23 @@ import React, { Component } from "react"
 import IssueList from "./IssueList"
 import "./issues.css"
 
+
+
+
 class Dashboard extends Component {
 
-render() {
-    return (
-        <div>
+    render() {
+        return (
+            <>
+                <div>
 
-            <IssueList
-            user={this.props.user}/>
+                    <IssueList
+                        user={this.props.user} />
 
-        </div>
-    );
-}
+                </div>
+            </>
+        );
+    }
 }
 
 export default Dashboard;

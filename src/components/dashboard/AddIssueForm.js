@@ -21,6 +21,7 @@ class AddIssueForm extends Component {
         issueDescription: "",
         issueDeadline: "",
         userId: "",
+        userName: "",
         helpingUserId: null,
         imageURL: "",
         uploadedFile: null,
@@ -33,6 +34,7 @@ class AddIssueForm extends Component {
     };
 
     activeUserId = parseInt(sessionStorage.getItem("userId"))
+    activeUserName = sessionStorage.getItem("name")
 
 
     onImageDrop(files) {
@@ -82,6 +84,7 @@ class AddIssueForm extends Component {
             this.setState({ loadingStatus: true });
             const addedIssue = {
                 userId: this.activeUserId,
+                userName: this.activeUserName,
                 issueName: this.state.issueName,
                 issueDescription: this.state.issueDescription,
                 issueDeadline: this.state.issueDeadline,

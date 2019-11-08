@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
 import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
+import EditCompleteIssueForm from "../resolvedView/EditCompleteIssueForm"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 import "../dashboard/issues.css"
 
@@ -15,8 +16,12 @@ class IssueCard extends Component {
 		issueId: "",
 		comments: [],
 		modal: false,
-		commentModal: false
+		commentModal: false,
+		editCommentModal: false
 	};
+
+	activeUserId = parseInt(sessionStorage.getItem("userId"))
+	activeUsername = (sessionStorage.getItem("name"))
 
 	commentStateUpdate = () => {
 		APIManager.getAllComments("comments")
@@ -26,9 +31,6 @@ class IssueCard extends Component {
 			}
 			)
 			.then((filteredArray) => this.setState({ comments: filteredArray }))
-
-
-
 	}
 
 	toggle = () => {
@@ -43,8 +45,11 @@ class IssueCard extends Component {
 		}))
 	}
 
-	activeUserId = parseInt(sessionStorage.getItem("userId"))
-	activeUsername = (sessionStorage.getItem("name"))
+	editCommentToggle = () => {
+		this.setState(prevState => ({
+			editCommentModal: !prevState.editCommentModal
+		}))
+	}
 
 	handleDelete = id => {
 		APIManager.delete("issues", id)
@@ -84,6 +89,16 @@ class IssueCard extends Component {
 				&times;
 			</button>
 		);
+		const commentCloseBtn = (
+			<button className="close" onClick={this.commentToggle}>
+				&times;
+			</button>
+		);
+		const editCloseBtn = (
+			<button className="close" onClick={this.editCommentToggle}>
+				&times;
+			</button>
+		);
 		return (
 			<>
 				<div className="issue-card">
@@ -91,6 +106,9 @@ class IssueCard extends Component {
 						<div className="issue-card-details">
 							<div className="issue-card-body">
 								<span className="card-issueTitle">
+									<p className="created-by">
+										Created By: {this.props.issue.userName}
+									</p>
 									<h5>
 										{this.props.issue.issueName}
 									</h5>
@@ -162,7 +180,7 @@ class IssueCard extends Component {
 									<Button outline color="info"
 										type="button" className="edit-comment"
 										onClick={() => {
-											this.commentToggle();
+											this.editCommentToggle();
 										}}
 									>Edit Comment
 									</Button>
@@ -189,7 +207,7 @@ class IssueCard extends Component {
 									<Button outline color="info"
 										type="button" className="edit-comment"
 										onClick={() => {
-											this.commentToggle();
+											this.editCommentToggle();
 										}}
 									>Edit Comments
 									</Button>
@@ -206,7 +224,7 @@ class IssueCard extends Component {
 						}
 
 
-						{(this.props.activeUserId === this.props.issueUserId) ?
+						{this.props.activeUserId === this.props.issueUserId ?
 							<>
 								<div className="card-buttons">
 									<Button
@@ -214,7 +232,7 @@ class IssueCard extends Component {
 										type="button"
 										className="delete-issue"
 										onClick={() =>
-											this.handleDelete(this.props.issue.id)
+											this.props.deleteIssue(this.props.issue.id)
 										}
 									>
 										Remove
@@ -246,12 +264,13 @@ class IssueCard extends Component {
 						<ModalHeader
 							toggle={this.toggle}
 							close={closeBtn}>
-							Edit issue
+							Edit Issue
 							</ModalHeader>
 						<ModalBody>
 							<EditIssueForm
 								{...this.props}
 								issueId={this.props.issue.id}
+								getMyIssuesData={this.props.getMyIssuesData}
 								getData={this.props.getData}
 								toggle={this.toggle} />
 						</ModalBody>
@@ -266,17 +285,43 @@ class IssueCard extends Component {
 					>
 						<ModalHeader
 							toggle={this.commentToggle}
-							close={closeBtn}>
+							close={commentCloseBtn}>
 							Issue Resolved - Leave a Comment!
 							</ModalHeader>
 						<ModalBody>
-							<CompleteIssueForm
+
+						<CompleteIssueForm
 								key={this.props.issue.id}
 								{...this.props}
 								commentStateUpdate={this.commentStateUpdate}
 								issueId={this.props.issue.id}
 								getData={this.props.getData}
 								toggle={this.commentToggle} />
+						</ModalBody>
+
+
+					</Modal>
+
+					<Modal
+						isOpen={this.state.editCommentModal}
+						toggle={this.editCommentToggle}
+						className={this.props.className}
+					>
+						<ModalHeader
+							toggle={this.editCommentToggle}
+							close={editCloseBtn}>
+							Issue Resolved - Edit Your Comment!
+							</ModalHeader>
+						<ModalBody>
+
+                            <EditCompleteIssueForm
+								key={this.props.issue.id}
+								{...this.props}
+								commentStateUpdate={this.commentStateUpdate}
+								issueId={this.props.issue.id}
+								getData={this.props.getData}
+								toggle={this.editCommentToggle} />
+
 						</ModalBody>
 
 

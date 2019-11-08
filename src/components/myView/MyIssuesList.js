@@ -1,6 +1,7 @@
 // Purpose of the file to display all issues
 import React, { Component } from "react";
 import IssueCard from "../dashboard/IssueCard";
+import ReactMap from "../map/Map"
 import APIManager from "../../modules/APIManager";
 
 class MyIssuesList extends Component {
@@ -20,9 +21,9 @@ class MyIssuesList extends Component {
         }));
     };
 
-    deleteissue = id => {
+    deleteMyIssue = id => {
         APIManager.delete("issues", id).then(() => {
-            APIManager.getAll("issues").then(newissues => {
+            APIManager.getAllMy("issues", this.activeUserId).then(newissues => {
                 this.setState({
                     issues: newissues
                 });
@@ -30,7 +31,7 @@ class MyIssuesList extends Component {
         });
     };
 
-    getData = () => APIManager.getAll("issues").then(issues => {
+    getMyIssuesData = () => APIManager.getAllMy("issues", this.activeUserId).then(issues => {
         this.setState({
             issues: issues
         });
@@ -42,7 +43,7 @@ class MyIssuesList extends Component {
             this.setState({
                 issues: issues
             });
-            APIManager.getComment("comments", this.activeUserId)
+            APIManager.getAllMy("comments", this.activeUserId)
                 .then(
                     comment => {
                         this.setState({
@@ -62,19 +63,24 @@ class MyIssuesList extends Component {
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
-                                deleteIssue={this.deleteIssue}
+                                deleteMyIssue={this.deleteMyIssue}
                                 user={this.props.user}
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}
                                 {...this.props}
-                                getData={this.getData}
+                                getMyIssuesData={this.getMyIssuesData}
                             />
                         ))}
                     </div>
+                    <div className="MyAppWrapper">
+                        <div className="Container">
+                            <ReactMap />
+                        </div>
+                    </div>
                 </div>
             </>
-        );
-    }
-}
-
-export default MyIssuesList;
+                );
+            }
+        }
+        
+        export default MyIssuesList;

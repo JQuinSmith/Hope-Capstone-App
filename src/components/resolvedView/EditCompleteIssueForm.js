@@ -3,14 +3,15 @@ import APIManager from "../../modules/APIManager";
 import { Button, ModalBody, FormGroup, Label, Input, ModalFooter } from "reactstrap";
 import "../dashboard/issues.css";
 
-class CompleteIssueForm extends Component {
+class EditCompleteIssueForm extends Component {
+
     state = {
-        comment: [],
+        comment: "",
         commentInput: "",
+        activeUserName: "",
+        activeUser: parseInt(sessionStorage.getItem("userId")),
         loadingStatus: true,
         modal: false,
-        activeUser: parseInt(sessionStorage.getItem("userId")),
-        activeUserName: sessionStorage.getItem("name")
     };
 
     handleFieldChange = evt => {
@@ -19,62 +20,45 @@ class CompleteIssueForm extends Component {
         this.setState(stateToChange);
     };
 
-    addComment = evt => {
+    updateComment = evt => {
         evt.preventDefault();
         this.props.toggle();
         // this.setState({ loadingStatus: true });
-        const addedComment = {
-            userId: this.state.activeUser,
+        const updatedComment = {
+            id: parseInt(this.props.comment.id),
             activeUserName: this.state.activeUserName,
-            issueId: this.props.issueId,
-            comment: this.state.commentInput
-        };
-        APIManager.post("comments", addedComment)
+            comment: this.state.commentInput,
+            issueId: parseInt(this.props.issueId),
+            userId: this.state.activeUser
+        }
+        APIManager.update("comments", updatedComment)
         .then(() => this.props.commentStateUpdate())
 
     };
 
-
     componentDidMount() {
-        APIManager.get("issues", this.props.issueId)
-            .then(
-                issue => {
-                    this.setState({
-                        issueName: issue.issueName,
-                        issueDescription: issue.issueDescription,
-                        issueDeadline: issue.issueDeadline,
-                        loadingStatus: false
+		return APIManager.getComment(this.props.issue.id)
+			.then(
+				comment => {
+					this.setState({
+						activeUserName: comment.activeUserName,
+						commentId: comment.id,
+						comment: comment.comment,
+						loadingStatus: false,
                     });
-                    APIManager.getComment(this.props.issueId)
-                        .then(
-                            comment =>
-                                this.setState({
-                                    comment: comment,
-                                    loadingStatus: false
-                                })
-                        )
-                })
-    };
+                    console.log("componentDidMount here:", comment)
+				});
+	};
 
-    render() {console.log(this.props.issueId)
+    render() {
         return (
             <>
                 <ModalBody>
                     <div>
                         <div className="formgrid">
 
-                            <h5 htmlFor="issueName">Issue Title</h5>
-                            <p>{this.state.issueName}</p>
-
-
-                            <h5 htmlFor="issueDescription">Entry</h5>
-                            <p>{this.state.issueDescription}</p>
-
-                            <h5 htmlFor="issueDeadline">Date of Completion</h5>
-                            <p>{this.state.issueDeadline}</p>
-
                             <h5 htmlFor="comment">Comments</h5>
-                            {this.state.comment.map(oneComment => <p>{oneComment.comment}</p>)}
+                            {this.state.activeUserName}: {this.state.comment}
 
                         </div>
                         <div className="alignRight">
@@ -86,7 +70,7 @@ class CompleteIssueForm extends Component {
                 <ModalFooter>
                     <div>
                         <FormGroup>
-                            <Label for="commentInput">Quick Notes About Your Experience:</Label>
+                            <Label for="commentInput">Something you forgot to add?</Label>
                             <Input onChange={this.handleFieldChange}
                                 type="textarea"
                                 name="commentInput"
@@ -97,7 +81,7 @@ class CompleteIssueForm extends Component {
                         type="button"
                         disabled={this.state.loadingStatus}
                         onClick={(evt) => {
-                            this.addComment(evt)
+                            this.updateComment(evt)
                         }}
                         className="btn btn-primary"
                     >
@@ -106,8 +90,9 @@ class CompleteIssueForm extends Component {
                     <Button className="cancel" onClick={this.props.toggle}>Cancel</Button>
                 </ModalFooter>
             </>
+
         )
     }
 }
 
-export default CompleteIssueForm;
+export default EditCompleteIssueForm;

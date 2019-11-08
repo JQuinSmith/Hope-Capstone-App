@@ -4,8 +4,8 @@ export default {
     get(resource, id) {
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
-    getComment(resource, id) {
-      return fetch(`${remoteURL}/${resource}?issueId=${id}`).then(result => result.json())
+    getComment(id) {
+      return fetch(`${remoteURL}/comments?issueId=${id}`).then(result => result.json())
     },
     getAll(resource){
       return fetch (`${remoteURL}/${resource}?issueComplete=false`).then(result => result.json())
@@ -20,7 +20,7 @@ export default {
     },
 
     getAllMyAccepted(resource, helpingUserId) {
-      return fetch(`${remoteURL}/${resource}?issueComplete=false&helpingUserId=/=${helpingUserId}`).then(result => result.json())
+      return fetch(`${remoteURL}/${resource}?issueComplete=false&helpingUserId=${helpingUserId}`).then(result => result.json())
     },
 
     getAllMyResolved(resource, userId) {
@@ -61,6 +61,16 @@ export default {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({helpingUserId: helpingUser})
+    }).then(data => data.json());
+  },
+
+  editComment(resource, userId, editedComment) {
+    return fetch(`${remoteURL}/${resource}/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({comment: editedComment})
     }).then(data => data.json());
   },
 

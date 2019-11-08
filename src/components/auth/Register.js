@@ -71,7 +71,7 @@ export default class Register extends Component {
         const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
         return (
             <div>
-                <Button
+                <Button outline color="secondary"
                     className="registrationButton"
                     onClick={this.toggle}
                 >
