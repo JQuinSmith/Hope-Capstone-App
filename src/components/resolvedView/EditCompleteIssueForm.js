@@ -7,8 +7,8 @@ class EditCompleteIssueForm extends Component {
 
     state = {
         comment: "",
+        commentId: "",
         commentInput: "",
-        activeUserName: "",
         activeUser: parseInt(sessionStorage.getItem("userId")),
         loadingStatus: true,
         modal: false,
@@ -37,20 +37,19 @@ class EditCompleteIssueForm extends Component {
     };
 
     componentDidMount() {
-		return APIManager.getComment(this.props.issue.id)
+		return APIManager.getComment(this.props.commentId)
 			.then(
 				comment => {
 					this.setState({
-						activeUserName: comment.activeUserName,
-						commentId: comment.id,
 						comment: comment.comment,
+						commentId: this.props.commentId,
 						loadingStatus: false,
                     });
                     console.log("componentDidMount here:", comment)
 				});
 	};
 
-    render() {
+    render() { console.log("values in state:", this.state.activeUser, this.props.commentId, this.state.comment)
         return (
             <>
                 <ModalBody>
@@ -58,7 +57,7 @@ class EditCompleteIssueForm extends Component {
                         <div className="formgrid">
 
                             <h5 htmlFor="comment">Comments</h5>
-                            {this.state.activeUserName}: {this.state.comment}
+                            {this.state.comment}
 
                         </div>
                         <div className="alignRight">

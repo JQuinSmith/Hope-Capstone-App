@@ -88,7 +88,7 @@ class Login extends Component {
                                         <label htmlFor="inputEmail">Name</label>
                                         <input onChange={this.handleFieldChange} type="text"
                                             id="name" className="name"
-                                            placeholder="Name"
+                                            placeholder="You've got one, right?"
                                             required="" autoFocus="" /><br></br>
 
                                         <br></br>
@@ -101,7 +101,7 @@ class Login extends Component {
                                             type="email"
                                             id="email"
                                             className="email"
-                                            placeholder="Email address"
+                                            placeholder="someone@example.com"
                                             required=""
                                             autoFocus=""
                                         />
@@ -116,7 +116,7 @@ class Login extends Component {
                                             type="password"
                                             id="password"
                                             className="password"
-                                            placeholder="Password"
+                                            placeholder="It's 1234 isn't it?"
                                             required=""
                                         />
                                     </div>
@@ -132,9 +132,12 @@ class Login extends Component {
 						</Button>
                         </ModalFooter>
                     </Modal>
-
-                    <img alt="logo" src={require("../../images/hope_logo.png")} className="hope-logo-login" />
-
+                    <div className="hope-container">
+                        <img alt="logo" src={require("../../images/hope_logo.png")} className="hope-logo-login" />
+                        <div className="hope-title">
+                            Hope
+                        </div>
+                    </div>
 
                     <Register triggerRender={this.props.triggerRender} {...this.props} />
 

@@ -4,6 +4,7 @@ import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
 import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
 import EditCompleteIssueForm from "../resolvedView/EditCompleteIssueForm"
+import CommentsCard from "./CommentsCard"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 import "../dashboard/issues.css"
 
@@ -17,7 +18,8 @@ class IssueCard extends Component {
 		comments: [],
 		modal: false,
 		commentModal: false,
-		editCommentModal: false
+		editCommentModal: false,
+		editCommentId: null
 	};
 
 	activeUserId = parseInt(sessionStorage.getItem("userId"))
@@ -45,7 +47,7 @@ class IssueCard extends Component {
 		}))
 	}
 
-	editCommentToggle = () => {
+	editCommentToggle = (creatorComment) => {
 		this.setState(prevState => ({
 			editCommentModal: !prevState.editCommentModal
 		}))
@@ -72,7 +74,7 @@ class IssueCard extends Component {
 	}
 
 	componentDidMount() {
-		APIManager.getAllComments("comments")
+		APIManager.getAllComments(this.props.issue.id)
 			.then(
 				responseComments => {
 					let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
@@ -84,6 +86,7 @@ class IssueCard extends Component {
 
 
 	render() {
+		console.log(this.state.comments)
 		const closeBtn = (
 			<button className="close" onClick={this.toggle}>
 				&times;
@@ -174,51 +177,20 @@ class IssueCard extends Component {
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
-								{this.state.comments.map(creatorComment => <p className="comment">{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
-								<div className="card-buttons">
 
-									<Button outline color="info"
-										type="button" className="edit-comment"
-										onClick={() => {
-											this.editCommentToggle();
-										}}
-									>Edit Comment
-									</Button>
-									<Button outline color="success"
-										type="button" className="add-comment"
-										onClick={() => {
-											this.commentToggle();
-										}}
-									>Add Comment
-									</Button>
-								</div>
+								{this.state.comments.map(creatorComment => <CommentsCard key={creatorComment.id} comment={creatorComment} {...this.props} />)}
 
 							</>
 							: null
 						}
 
+						{/* Comment buttons for the creating user */}
 						{this.props.activeUserId === this.props.issueUserId && this.props.issue.issueComplete === true ?
 
 							<>
 
-								{this.state.comments.map(creatorComment => <p className="comment">{creatorComment.activeUserName}: {creatorComment.comment}</p>)}
-								<div className="card-buttons">
+								{this.state.comments.map(creatorComment => <CommentsCard key={creatorComment.id} comment={creatorComment} {...this.props} />)}
 
-									<Button outline color="info"
-										type="button" className="edit-comment"
-										onClick={() => {
-											this.editCommentToggle();
-										}}
-									>Edit Comments
-									</Button>
-									<Button outline color="success"
-										type="button" className="add-comment"
-										onClick={() => {
-											this.commentToggle();
-										}}
-									>Add Comments
-									</Button>
-								</div>
 							</>
 							: null
 						}
@@ -290,7 +262,7 @@ class IssueCard extends Component {
 							</ModalHeader>
 						<ModalBody>
 
-						<CompleteIssueForm
+							<CompleteIssueForm
 								key={this.props.issue.id}
 								{...this.props}
 								commentStateUpdate={this.commentStateUpdate}
@@ -314,11 +286,13 @@ class IssueCard extends Component {
 							</ModalHeader>
 						<ModalBody>
 
-                            <EditCompleteIssueForm
+							<EditCompleteIssueForm
 								key={this.props.issue.id}
 								{...this.props}
 								commentStateUpdate={this.commentStateUpdate}
 								issueId={this.props.issue.id}
+								issue={this.props.issue}
+								commentId={this.state.editCommentId}
 								getData={this.props.getData}
 								toggle={this.editCommentToggle} />
 

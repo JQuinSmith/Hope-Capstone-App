@@ -96,5 +96,6 @@ nav {
 }
 
 .nav-link-logout:hover {
-  border-bottom: 3px solid !important;
+  color: #d50303 !important;
+  border-bottom: 3px solid #d50303 !important;
 }

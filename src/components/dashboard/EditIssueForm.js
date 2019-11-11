@@ -85,6 +85,7 @@ class EditIssueForm extends Component {
 						imageURL: issue.imageURL,
 						loadingStatus: false,
 					});
+					console.log("this is issue:", issue)
 				});
 	};
 

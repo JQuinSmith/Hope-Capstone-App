@@ -5,14 +5,14 @@ export default {
       return fetch(`${remoteURL}/${resource}/${id}`).then(result => result.json())
     },
     getComment(id) {
-      return fetch(`${remoteURL}/comments?issueId=${id}`).then(result => result.json())
+      return fetch(`${remoteURL}/comments/${id}`).then(result => result.json())
     },
     getAll(resource){
       return fetch (`${remoteURL}/${resource}?issueComplete=false`).then(result => result.json())
     },
 
-    getAllComments(resource){
-      return fetch (`${remoteURL}/${resource}`).then(result => result.json())
+    getAllComments(issueId){
+      return fetch (`${remoteURL}/comments?issueId=${issueId}&_expand=user`).then(result => result.json())
     },
 
     getAllMy(resource, userId) {

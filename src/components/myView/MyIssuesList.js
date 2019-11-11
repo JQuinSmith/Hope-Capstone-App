@@ -63,7 +63,7 @@ class MyIssuesList extends Component {
                             <IssueCard
                                 key={issue.id}
                                 issue={issue}
-                                deleteMyIssue={this.deleteMyIssue}
+                                deleteIssue={this.deleteMyIssue}
                                 user={this.props.user}
                                 activeUserId={this.activeUserId}
                                 issueUserId={issue.userId}
