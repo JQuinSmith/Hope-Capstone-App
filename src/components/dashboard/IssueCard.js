@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import APIManager from "../../modules/APIManager";
 import EditIssueForm from "./EditIssueForm"
-import CompleteIssueForm from "../resolvedView/CompleteIssueForm"
-import EditCompleteIssueForm from "../resolvedView/EditCompleteIssueForm"
+// import CompleteIssueForm from "../resolvedView/CompleteIssueForm";
+// import EditCompleteIssueForm from "../resolvedView/EditCompleteIssueForm";
 import CommentsCard from "./CommentsCard"
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 import "../dashboard/issues.css"
@@ -19,7 +19,6 @@ class IssueCard extends Component {
 		modal: false,
 		commentModal: false,
 		editCommentModal: false,
-		editCommentId: null
 	};
 
 	activeUserId = parseInt(sessionStorage.getItem("userId"))
@@ -86,19 +85,8 @@ class IssueCard extends Component {
 
 
 	render() {
-		console.log(this.state.comments)
 		const closeBtn = (
 			<button className="close" onClick={this.toggle}>
-				&times;
-			</button>
-		);
-		const commentCloseBtn = (
-			<button className="close" onClick={this.commentToggle}>
-				&times;
-			</button>
-		);
-		const editCloseBtn = (
-			<button className="close" onClick={this.editCommentToggle}>
 				&times;
 			</button>
 		);
@@ -174,12 +162,19 @@ class IssueCard extends Component {
 							: null
 						}
 
+						{/* Comment buttons for the helping user */}
 						{this.props.activeUserId === this.props.helpingUserId && this.props.issue.issueComplete === true ?
 
 							<>
 
-								{this.state.comments.map(creatorComment => <CommentsCard key={creatorComment.id} comment={creatorComment} {...this.props} />)}
-
+								{this.state.comments.map(creatorComment =>
+								<CommentsCard
+								key={creatorComment.id}
+								comment={creatorComment}
+								activeUserId={this.props.activeUserId}
+								helpingUserId={this.props.helpingUserId}
+								issue={this.props.issue}
+								{...this.props} />)}
 							</>
 							: null
 						}
@@ -189,7 +184,11 @@ class IssueCard extends Component {
 
 							<>
 
-								{this.state.comments.map(creatorComment => <CommentsCard key={creatorComment.id} comment={creatorComment} {...this.props} />)}
+								{this.state.comments.map(creatorComment =>
+								<CommentsCard
+								key={creatorComment.id}
+								comment={creatorComment}
+								{...this.props} />)}
 
 							</>
 							: null
@@ -226,8 +225,6 @@ class IssueCard extends Component {
 						}
 					</div>
 
-
-
 					<Modal
 						isOpen={this.state.modal}
 						toggle={this.toggle}
@@ -250,56 +247,6 @@ class IssueCard extends Component {
 
 					</Modal>
 
-					<Modal
-						isOpen={this.state.commentModal}
-						toggle={this.commentToggle}
-						className={this.props.className}
-					>
-						<ModalHeader
-							toggle={this.commentToggle}
-							close={commentCloseBtn}>
-							Issue Resolved - Leave a Comment!
-							</ModalHeader>
-						<ModalBody>
-
-							<CompleteIssueForm
-								key={this.props.issue.id}
-								{...this.props}
-								commentStateUpdate={this.commentStateUpdate}
-								issueId={this.props.issue.id}
-								getData={this.props.getData}
-								toggle={this.commentToggle} />
-						</ModalBody>
-
-
-					</Modal>
-
-					<Modal
-						isOpen={this.state.editCommentModal}
-						toggle={this.editCommentToggle}
-						className={this.props.className}
-					>
-						<ModalHeader
-							toggle={this.editCommentToggle}
-							close={editCloseBtn}>
-							Issue Resolved - Edit Your Comment!
-							</ModalHeader>
-						<ModalBody>
-
-							<EditCompleteIssueForm
-								key={this.props.issue.id}
-								{...this.props}
-								commentStateUpdate={this.commentStateUpdate}
-								issueId={this.props.issue.id}
-								issue={this.props.issue}
-								commentId={this.state.editCommentId}
-								getData={this.props.getData}
-								toggle={this.editCommentToggle} />
-
-						</ModalBody>
-
-
-					</Modal>
 
 
 				</div>
