@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import L from 'leaflet';
 import ReactMapboxGl, { Layer } from 'react-mapbox-gl';
-// import { Marker } from 'react-mapbox-gl';
+import { Marker } from 'react-mapbox-gl';
 import 'leaflet/dist/leaflet.css';
 import '../dashboard/issues.css';
 // import styled from 'styled-components'

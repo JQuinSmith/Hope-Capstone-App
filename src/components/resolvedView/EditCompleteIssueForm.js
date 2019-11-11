@@ -23,33 +23,31 @@ class EditCompleteIssueForm extends Component {
     updateComment = evt => {
         evt.preventDefault();
         this.props.toggle();
-        // this.setState({ loadingStatus: true });
         const updatedComment = {
             id: parseInt(this.props.comment.id),
-            activeUserName: this.state.activeUserName,
             comment: this.state.commentInput,
             issueId: parseInt(this.props.issueId),
             userId: this.state.activeUser
         }
         APIManager.update("comments", updatedComment)
-        .then(() => this.props.commentStateUpdate())
+            .then(() => this.props.commentStateUpdate())
 
     };
 
     componentDidMount() {
-		return APIManager.getComment(this.props.commentId)
-			.then(
-				comment => {
-					this.setState({
-						comment: comment.comment,
-						commentId: this.props.commentId,
-						loadingStatus: false,
+        return APIManager.getComment(this.props.commentId)
+            .then(
+                comment => {
+                    this.setState({
+                        comment: comment.comment,
+                        commentId: this.props.commentId,
+                        loadingStatus: false,
                     });
                     console.log("componentDidMount here:", comment)
-				});
-	};
+                });
+    };
 
-    render() { console.log("values in state:", this.state.activeUser, this.props.commentId, this.state.comment)
+    render() {
         return (
             <>
                 <ModalBody>
@@ -57,7 +55,7 @@ class EditCompleteIssueForm extends Component {
                         <div className="formgrid">
 
                             <h5 htmlFor="comment">Comments</h5>
-                            {this.state.comment}
+                            {this.props.comment.user.name}: {this.state.comment}
 
                         </div>
                         <div className="alignRight">

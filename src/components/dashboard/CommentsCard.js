@@ -82,7 +82,7 @@ export default class CommentsCard extends Component {
                         <EditCompleteIssueForm
                             key={this.props.issue.id}
                             {...this.props}
-                            commentStateUpdate={this.commentStateUpdate}
+                            commentStateUpdate={this.props.commentStateUpdate}
                             issueId={this.props.issue.id}
                             issue={this.props.issue}
                             commentId={this.props.comment.id}
@@ -101,14 +101,15 @@ export default class CommentsCard extends Component {
                                     this.editCommentToggle()
                                 }}
                             >Edit Comments
-									</Button>
+                            </Button>
+
                             <Button outline color="success"
                                 type="button" className="add-comment"
                                 onClick={() => {
                                     this.commentToggle();
                                 }}
                             >Add Comments
-									</Button>
+                            </Button>
                         </div>
                     </>
                     : null

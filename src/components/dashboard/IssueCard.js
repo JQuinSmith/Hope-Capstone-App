@@ -25,7 +25,7 @@ class IssueCard extends Component {
 	activeUsername = (sessionStorage.getItem("name"))
 
 	commentStateUpdate = () => {
-		APIManager.getAllComments("comments")
+		APIManager.getAllComments(this.props.issue.id)
 			.then(responseComments => {
 				let comments = responseComments.filter(comment => comment.issueId === this.props.issue.id)
 				return comments
@@ -171,6 +171,7 @@ class IssueCard extends Component {
 								<CommentsCard
 								key={creatorComment.id}
 								comment={creatorComment}
+								commentStateUpdate={this.commentStateUpdate}
 								activeUserId={this.props.activeUserId}
 								helpingUserId={this.props.helpingUserId}
 								issue={this.props.issue}

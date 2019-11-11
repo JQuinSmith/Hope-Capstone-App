@@ -39,6 +39,7 @@
     },
     {
       "id": 12,
+      "userName": "Quin",
       "issueName": "Why don't you have an author name",
       "issueDescription": "Oh wait, you totally do.",
       "issueComplete": false,
@@ -82,7 +83,7 @@
   "comments": [
     {
       "id": 1,
-      "comment": "Sorry excuse me.",
+      "comment": "Titans suck",
       "issueId": 11,
       "userId": 1
     },

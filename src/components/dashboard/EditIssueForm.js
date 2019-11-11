@@ -18,36 +18,39 @@ class EditIssueForm extends Component {
 		issueDeadline: "",
 		imageURL: "",
 		uploadedFile: "",
+		latitudeValue: null,
+		longitudeValue: null,
+		locationName: null,
 		loadingStatus: true,
 		modal: false,
 		activeUser: parseInt(sessionStorage.getItem("userId"))
 	};
 
 	onImageDrop(files) {
-        this.setState({
-            uploadedFile: files[0]
-        });
+		this.setState({
+			uploadedFile: files[0]
+		});
 
-        this.handleImageUpload(files[0]);
-    }
+		this.handleImageUpload(files[0]);
+	}
 
-    handleImageUpload(file) {
-        let upload = request.post(uploadURL)
-            .field('upload_preset', uploadPreset)
-            .field('file', file);
+	handleImageUpload(file) {
+		let upload = request.post(uploadURL)
+			.field('upload_preset', uploadPreset)
+			.field('file', file);
 
-        upload.end((err, response) => {
-            if (err) {
-                console.error(err);
-            }
+		upload.end((err, response) => {
+			if (err) {
+				console.error(err);
+			}
 
-            if (response.body.secure_url !== '') {
-                this.setState({
-                    imageURL: response.body.secure_url
-                });
-            }
-        });
-    }
+			if (response.body.secure_url !== '') {
+				this.setState({
+					imageURL: response.body.secure_url
+				});
+			}
+		});
+	}
 
 	handleFieldChange = evt => {
 		const stateToChange = {};
@@ -60,12 +63,15 @@ class EditIssueForm extends Component {
 		this.setState({ loadingStatus: true });
 		const editedIssue = {
 			id: parseInt(this.props.issueId),
+			userId: this.state.activeUser,
 			issueName: this.state.issueName,
 			issueDescription: this.state.issueDescription,
-			issueComplete: this.state.issueComplete,
-			issueDeadline: this.state.issueDeadline,
 			imageURL: this.state.imageURL,
-			userId: this.state.activeUser
+			issueDeadline: this.state.issueDeadline,
+			issueComplete: this.state.issueComplete,
+			latitudeValue: this.state.latitudeValue,
+			longitudeValue: this.state.longitudeValue,
+			locationName: this.state.locationName
 		};
 		console.log(editedIssue)
 		APIManager.update("issues", editedIssue)
@@ -83,6 +89,9 @@ class EditIssueForm extends Component {
 						issueDescription: issue.issueDescription,
 						issueDeadline: issue.issueDeadline,
 						imageURL: issue.imageURL,
+						latitudeValue: issue.latitudeValue,
+						longitudeValue: issue.longitudeValue,
+						locationName: issue.locationName,
 						loadingStatus: false,
 					});
 					console.log("this is issue:", issue)
