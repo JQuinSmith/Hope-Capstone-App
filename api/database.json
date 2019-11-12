@@ -21,77 +21,35 @@
   ],
   "issues": [
     {
-      "userId": 3,
-      "userName": "Dummy",
-      "issueName": "olfkjqo",
-      "issueDescription": "soifjkso",
-      "issueDeadline": "2019-11-21",
-      "issueComplete": true,
-      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573088480/guejm8goyp5nvrdyrtgz.jpg",
-      "uploadedFile": {
-        "path": "Downtown.jpg"
-      },
-      "helpingUserId": 1,
-      "latitudeValue": null,
-      "longitudeValue": null,
-      "locationName": null,
-      "id": 11
-    },
-    {
-      "id": 12,
-      "userName": "Quin",
-      "issueName": "Why don't you have an author name",
-      "issueDescription": "Oh wait, you totally do.",
-      "issueComplete": false,
-      "issueDeadline": "2019-11-08",
-      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573163438/dtmvr4h7sqxyhz9a92ym.jpg",
-      "userId": 1
-    },
-    {
       "userId": 1,
       "userName": "Quin",
-      "issueName": "One without an image",
-      "issueDescription": "oiahflasdfja",
-      "issueDeadline": "2019-11-08",
+      "issueName": "Show me some magic",
+      "issueDescription": "I need to see it.",
+      "issueDeadline": "2019-11-11",
       "issueComplete": false,
       "imageURL": "",
       "uploadedFile": null,
       "helpingUserId": null,
-      "latitudeValue": null,
-      "longitudeValue": null,
-      "locationName": null,
-      "id": 13
+      "latitudeValue": 36.183314,
+      "longitudeValue": -86.588142,
+      "locationName": "5804 Avalon Court",
+      "id": 15
     },
     {
-      "userId": 3,
-      "userName": "Dummy",
-      "issueName": "This man will not leave this house.",
-      "issueDescription": "Any excuse to draw him away for like 3 hours would be grand.",
-      "issueDeadline": "2019-11-09",
+      "userId": 1,
+      "userName": "Quin",
+      "issueName": "Map Icon Works Anti-Climactically",
+      "issueDescription": "I'm done.",
+      "issueDeadline": "2019-11-11",
       "issueComplete": false,
-      "imageURL": "https://res.cloudinary.com/hopeapp/image/upload/v1573172665/kneja4oq2xt0fgigc718.jpg",
-      "uploadedFile": {
-        "path": "spooky.jpg"
-      },
+      "imageURL": "",
+      "uploadedFile": null,
       "helpingUserId": null,
-      "latitudeValue": null,
-      "longitudeValue": null,
-      "locationName": null,
-      "id": 14
+      "latitudeValue": 36.127738,
+      "longitudeValue": -86.72602,
+      "locationName": "301 Plus Park Blvd",
+      "id": 16
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "comment": "Titans suck",
-      "issueId": 11,
-      "userId": 1
-    },
-    {
-      "userId": 3,
-      "issueId": 11,
-      "comment": "Hi I'm dummy",
-      "id": 2
-    }
-  ]
+  "comments": []
 }

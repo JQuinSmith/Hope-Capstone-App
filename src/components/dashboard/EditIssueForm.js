@@ -12,6 +12,7 @@ const uploadURL = 'https://api.cloudinary.com/v1_1/hopeapp/image/upload';
 class EditIssueForm extends Component {
 	//set the initial state
 	state = {
+		userName: "",
 		issueName: "",
 		issueComplete: false,
 		issueDescription: "",
@@ -33,6 +34,8 @@ class EditIssueForm extends Component {
 
 		this.handleImageUpload(files[0]);
 	}
+
+	activeUserName = sessionStorage.getItem("name")
 
 	handleImageUpload(file) {
 		let upload = request.post(uploadURL)
@@ -64,6 +67,7 @@ class EditIssueForm extends Component {
 		const editedIssue = {
 			id: parseInt(this.props.issueId),
 			userId: this.state.activeUser,
+			userName: this.activeUserName,
 			issueName: this.state.issueName,
 			issueDescription: this.state.issueDescription,
 			imageURL: this.state.imageURL,
@@ -73,7 +77,6 @@ class EditIssueForm extends Component {
 			longitudeValue: this.state.longitudeValue,
 			locationName: this.state.locationName
 		};
-		console.log(editedIssue)
 		APIManager.update("issues", editedIssue)
 			.then(() => { this.props.getData() }
 			);
@@ -94,7 +97,6 @@ class EditIssueForm extends Component {
 						locationName: issue.locationName,
 						loadingStatus: false,
 					});
-					console.log("this is issue:", issue)
 				});
 	};
 

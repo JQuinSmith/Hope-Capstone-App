@@ -82,5 +82,9 @@ export default {
       },
       body: JSON.stringify({issueComplete: issueComplete})
     }).then(data => data.json());
+  },
+
+  mapBox(searchInput, token){console.log(searchInput, token)
+  return fetch (`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchInput}.json?bbox=-87.022634,36.064155,-86.533399,36.264275&country=US&access_token=${token}`).then(result => result.json())
   }
 }

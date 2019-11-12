@@ -6,7 +6,7 @@ import "./auth.css";
 import APIManager from "../../modules/APIManager";
 
 
-//Reactstrap Modal code from line 10 to 21
+
 class Login extends Component {
 
     // Set initial state

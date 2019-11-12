@@ -72,7 +72,10 @@ class IssueList extends Component {
                     </div>
                     <div className="AppWrapper">
                         <div className="Container">
-                            <ReactMap />
+                                <ReactMap
+                                    getData={this.Data}
+                                    {...this.props}
+                                />
                         </div>
                     </div>
                 </div>

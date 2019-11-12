@@ -11,7 +11,7 @@ import "../dashboard/issues.css";
 
 const uploadPreset = 'hopeapp';
 const uploadURL = 'https://api.cloudinary.com/v1_1/hopeapp/image/upload';
-
+const token = 'pk.eyJ1IjoicXVpbndpdGhvbmVuIiwiYSI6ImNrMm1yYXUyeTBsMXEzaGxwcTh5MXUyY3cifQ.x4yUJN7b4CIuxtM3e0lTSw';
 class AddIssueForm extends Component {
 
     //set the initial state
@@ -30,7 +30,7 @@ class AddIssueForm extends Component {
         locationName: null,
         id: [],
         loadingStatus: true,
-        modal: false
+        modal: false,
     };
 
     activeUserId = parseInt(sessionStorage.getItem("userId"))
@@ -81,25 +81,32 @@ class AddIssueForm extends Component {
         if (this.state.issueName === "" || this.state.issueDescription === "" || this.state.issueDeadline === "") {
             window.alert("Please input an issue");
         } else {
-            this.setState({ loadingStatus: true });
-            const addedIssue = {
-                userId: this.activeUserId,
-                userName: this.activeUserName,
-                issueName: this.state.issueName,
-                issueDescription: this.state.issueDescription,
-                issueDeadline: this.state.issueDeadline,
-                issueComplete: this.state.issueComplete,
-                imageURL: this.state.imageURL,
-                uploadedFile: this.state.uploadedFile,
-                helpingUserId: this.state.helpingUserId,
-                latitudeValue: this.state.latitudeValue,
-                longitudeValue: this.state.longitudeValue,
-                locationName: this.state.locationName
-            };
-
-            APIManager.post("issues", addedIssue)
-                .then(() => { this.props.getData() }
-                );
+            APIManager.mapBox(this.state.locationName, token)
+                .then(response => {
+                    this.setState({
+                        latitudeValue: response.features[0].center[1],
+                        longitudeValue: response.features[0].center[0]
+                    })
+                    this.setState({ loadingStatus: true });
+                    const addedIssue = {
+                        userId: this.activeUserId,
+                        userName: this.activeUserName,
+                        issueName: this.state.issueName,
+                        issueDescription: this.state.issueDescription,
+                        issueDeadline: this.state.issueDeadline,
+                        issueComplete: this.state.issueComplete,
+                        imageURL: this.state.imageURL,
+                        uploadedFile: this.state.uploadedFile,
+                        helpingUserId: this.state.helpingUserId,
+                        latitudeValue: this.state.latitudeValue,
+                        longitudeValue: this.state.longitudeValue,
+                        locationName: this.state.locationName
+                    };
+                    APIManager.post("issues", addedIssue)
+                        .then(() => { this.props.getData() }
+                        );
+                    console.log(response)
+                })
         };
     }
     render() {
@@ -147,6 +154,17 @@ class AddIssueForm extends Component {
                                         value={this.state.issueDescription}
                                     />
                                     <br></br>
+                                    <label htmlFor="issue">Location for the Issue?</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        className="form-control"
+                                        onChange={this.handleFieldChange}
+                                        id="locationName"
+                                        value={this.state.locationName}
+                                    />
+                                    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+                                    <br></br>
                                     <label htmlFor="issue">How Long Do We Have?</label>
                                     <input
                                         type="date"
@@ -185,18 +203,18 @@ class AddIssueForm extends Component {
                             </fieldset>
                         </form>
                     </ModalBody>
-                <ModalFooter>
-                    <Button
-                        className="add"
-                        onClick={this.addIssue}
-                    >
-                        Add
+                    <ModalFooter>
+                        <Button
+                            className="add"
+                            onClick={this.addIssue}
+                        >
+                            Add
 						</Button>{" "}
-                    <Button className="cancel" onClick={this.toggle}>
-                        Cancel
+                        <Button className="cancel" onClick={this.toggle}>
+                            Cancel
 						</Button>
-                </ModalFooter>
-            </Modal>
+                    </ModalFooter>
+                </Modal>
             </>
         );
     }
