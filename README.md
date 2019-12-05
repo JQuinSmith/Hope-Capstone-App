@@ -7,7 +7,9 @@ In regards to current events over the past few years, an overarching sense of ne
 How might we offer a platform that connects users in need with other local users willing to lend a hand, emphasizing the sense of community within the Greater Nashville Area?
 
 ## Personas
+<img src="personas/Person-In-Need.jpg" alt="Need a Hand">
 
+<img src="personas/Person-Lending-a-Hand.jpg" alt="Lend a Hand">
 
 ## Wireframes and Mockups
 <img src="readme-images/1-landing-page.jpg" alt="Mock-Up-1">
@@ -23,6 +25,6 @@ How might we offer a platform that connects users in need with other local users
 
 + More robust method of communicating between the user in need of a hand and the user lending a hand.
 
-+ Reconsider the order of the process of creating an issue. 
++ Reconsider the order of the process of creating an issue.
 
 ## Lessons Learned
